@@ -1,10 +1,154 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>ARL3</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AbdurRahim Islam — Infrastructure, Security &amp; Systems</title>
+<meta name="description" content="AbdurRahim Islam — CS &amp; ITWS student at RPI. Homelab infrastructure, security labs, and coursework.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="main.css">
 </head>
 <body>
-  <h1>ARL3</h1>
-  <p>Personal site coming soon.</p>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="mark" href="index.html"><span class="dot"></span>abdurrahim islam</a>
+    <nav class="crumbs">
+      <a href="pages/homelab.html">Homelab</a><span class="sep">/</span>
+      <a href="pages/university.html">University</a><span class="sep">/</span>
+      <a href="pages/career.html">Career</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="terminal reveal">
+      <div class="terminal-bar"><span class="led"></span><span class="led"></span><span class="led"></span>&nbsp;session — troy.ny</div>
+      <div class="terminal-body" data-boot='["$ whoami", "abdurrahim_islam — B.S. Computer Science &amp; ITWS, RPI", "", "$ uname -a", "location: Albany, NY   focus: infrastructure / security / automation", "", "$ ls ./currently", "security+ (in progress)   aws-saa (in progress)   homelab v2   ue5 project"]'></div>
+    </div>
+    <h1 class="reveal">AbdurRahim Islam</h1>
+    <p class="role reveal">Computer Science &amp; Information Technology / Web Science — Rensselaer Polytechnic Institute</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="lede reveal">I build and break systems to understand them. My work spans IT infrastructure, systems administration, and offensive/defensive security — backed by a self-built NAS and lab environment covering Active Directory, SIEM log analysis, and penetration testing. I've also done cloud-architecture consulting and UX/dashboard design for a manufacturing AI platform, and spend part of my time as an indie animator and game developer in Unreal Engine 5.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Three places to look</h2>
+      <span class="tag">index.html → pages/homelab.html, pages/university.html, pages/career.html</span>
+    </div>
+    <div class="modules">
+      <a class="module reveal" href="pages/homelab.html">
+        <span class="idx mono">NAS / SECURITY LABS / AUTOMATION</span>
+        <h3>Homelab &amp; Projects</h3>
+        <p>An enterprise-style NAS built from spare parts, a full security-lab stack, and the automation holding it together.</p>
+        <div class="stat">9+ lab environments running</div>
+      </a>
+      <a class="module reveal" href="pages/university.html">
+        <span class="idx mono">RPI / CS + ITWS</span>
+        <h3>University</h3>
+        <p>Coursework, standing, and the path from Albany Academy to RPI's Computer Science &amp; ITWS program.</p>
+        <div class="stat">Class of 2029</div>
+      </a>
+      <a class="module reveal" href="pages/career.html">
+        <span class="idx mono">EXPERIENCE / CERTIFICATIONS</span>
+        <h3>Career</h3>
+        <p>Consulting and UX work for manufacturing research platforms, plus certifications in progress.</p>
+        <div class="stat">3 roles / 3 certifications</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Skills, by domain</h2>
+      <span class="tag">grouped from resume</span>
+    </div>
+    <div class="stack reveal">
+      <div class="panel">
+        <div class="kv">
+          <dt>Cybersecurity</dt>
+          <dd>
+            <div class="tag-row">
+              <span class="tag">Wazuh (SIEM)</span><span class="tag">Splunk (SIEM)</span><span class="tag">Log analysis</span><span class="tag">Alert triage</span><span class="tag">Endpoint monitoring</span><span class="tag">Risk assessment</span>
+            </div>
+          </dd>
+          <dt>Offensive security</dt>
+          <dd>
+            <div class="tag-row">
+              <span class="tag">Kali Linux</span><span class="tag">Metasploit</span><span class="tag">OWASP ZAP</span><span class="tag">Pen-testing methodology</span><span class="tag">Vulnerability assessment</span>
+            </div>
+          </dd>
+          <dt>Systems &amp; identity</dt>
+          <dd>
+            <div class="tag-row">
+              <span class="tag">Active Directory</span><span class="tag">Windows Server</span><span class="tag">Ubuntu Linux</span><span class="tag">Unraid</span><span class="tag">Docker</span><span class="tag">Virtual machines</span>
+            </div>
+          </dd>
+          <dt>Networking</dt>
+          <dd>
+            <div class="tag-row">
+              <span class="tag">Cisco Packet Tracer</span><span class="tag">Wireshark</span><span class="tag">TCP/IP</span><span class="tag">DNS</span><span class="tag">VLANs</span><span class="tag">VPNs / Tailscale</span>
+            </div>
+          </dd>
+          <dt>Cloud &amp; data</dt>
+          <dd>
+            <div class="tag-row">
+              <span class="tag">AWS (S3, EC2, IAM)</span><span class="tag">Cloudflare</span><span class="tag">Nginx Proxy Manager</span><span class="tag">Object storage design</span>
+            </div>
+          </dd>
+          <dt>Automation</dt>
+          <dd>
+            <div class="tag-row">
+              <span class="tag">Python / Bash</span><span class="tag">REST APIs</span><span class="tag">n8n</span><span class="tag">Scheduled orchestration</span>
+            </div>
+          </dd>
+          <dt>Creative / AI</dt>
+          <dd>
+            <div class="tag-row">
+              <span class="tag">Unreal Engine 5</span><span class="tag">Blender</span><span class="tag">Local LLMs (Ollama)</span><span class="tag">Figma / UI-UX</span>
+            </div>
+          </dd>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Résumé</h2>
+      <span class="tag">updated Sept 2026</span>
+    </div>
+    <div class="panel reveal">
+      <iframe src="resources/resume.pdf" title="AbdurRahim Islam — Résumé" style="width:100%; height:640px; border:0; background:#fff;"></iframe>
+      <div class="btn-row">
+        <a class="btn" href="resources/resume.pdf" download>↓ Download PDF</a>
+        <a class="btn" href="https://www.linkedin.com/in/abdurrahim-islam-01b940373/" target="_blank" rel="noopener">LinkedIn profile</a>
+        <a class="btn" href="mailto:islama9@rpi.edu">islama9@rpi.edu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Albany, NY — built on GitHub Pages</span>
+    <a href="https://www.linkedin.com/in/abdurrahim-islam-01b940373/" target="_blank" rel="noopener">linkedin.com/in/abdurrahim-islam</a>
+  </div>
+</footer>
+
+<script src="main.js"></script>
 </body>
 </html>
