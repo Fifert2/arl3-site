@@ -3,220 +3,100 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Homelab &amp; Projects — AbdurRahim Islam</title>
-<meta name="description" content="A self-built NAS and security-lab environment: storage architecture, Active Directory, SIEM, offensive security, and automation.">
+<title>Homelab — AbdurRahim Islam</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../main.css">
 </head>
 <body>
 
 <header class="topbar">
-  <div class="wrap">
-    <a class="mark" href="../index.html"><span class="dot"></span>abdurrahim islam</a>
-    <nav class="crumbs">
-      <a href="homelab.html" class="current">Homelab</a><span class="sep">/</span>
-      <a href="university.html">University</a><span class="sep">/</span>
+  <div class="wrap-wide">
+    <a class="arl-mark" href="../index.html">ARL</a>
+    <nav class="top-nav">
+      <span class="divider"></span>
+      <a href="homelab.html" class="current">Homelab</a><span class="sep">|</span>
+      <a href="university.html">University</a><span class="sep">|</span>
       <a href="career.html">Career</a>
     </nav>
   </div>
+  <hr class="rule" style="margin-top:26px;">
 </header>
 
-<section class="hero" style="padding-top:64px;">
-  <div class="wrap">
-    <span class="tag mono reveal">/homelab</span>
-    <h1 class="reveal" style="margin-top:14px;">Homelab &amp; Projects</h1>
-    <p class="lede reveal" style="margin-top:18px;">Self-built from spare PC parts and enterprise-grade storage hardware, run as a real production environment rather than a demo — and used as a lab for Active Directory, SIEM log analysis, offensive security, and automation, all held together by Docker and a deliberate network architecture.</p>
+<section class="hero">
+  <div class="wrap-wide reveal">
+    <h1 style="font-size:clamp(30px,4.5vw,42px);">Homelab</h1>
+    <p class="placeholder-note" style="margin-top:10px;">Animations here should be stacked — each stage animates in as you scroll. This pass is the layout only; real scroll-triggered motion (case popping open, etc.) comes next in the IDE.</p>
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="section-head reveal">
-      <h2>Storage architecture</h2>
-      <span class="tag">Unraid / BTRFS / ~20TB raw</span>
+<section class="tight">
+  <div class="wrap-wide">
+    <div class="stage reveal">
+      <div class="stage-figure">photo — Jonsbo N3 case, closed</div>
+      <div>
+        <h3>My homelab — Jonsbo case</h3>
+        <p>Self-built NAS in a Jonsbo case, run as a real production environment rather than a demo.</p>
+      </div>
     </div>
-    <div class="diagram-wrap reveal">
-      <svg viewBox="0 0 940 560" data-draw-svg xmlns="http://www.w3.org/2000/svg">
-        <path class="dline" d="M130 80 L130 150" />
-        <path class="dline" d="M130 200 L130 260" />
-        <path class="dline" d="M470 80 L470 120 L550 120 L550 150" />
-        <path class="dline" d="M630 80 L630 120 L550 120 L550 150" />
-        <path class="dline" d="M130 320 L130 350 L320 350 L320 370" />
-        <path class="dline" d="M550 210 L550 370" />
-        <path class="dline" d="M815 90 L815 340 L600 340 L600 370" />
-        <path class="dline" d="M460 425 L460 470" />
-
-        <g class="dnode" data-node>
-          <rect x="50" y="30" width="160" height="50"/>
-          <text x="130" y="53" text-anchor="middle" font-size="12">IT-mode HBA</text>
-          <text x="130" y="68" text-anchor="middle" class="sub">flashed controller</text>
-        </g>
-        <g class="dnode" data-node>
-          <rect x="50" y="150" width="160" height="50"/>
-          <text x="130" y="173" text-anchor="middle" font-size="12">4× 4TB SAS drives</text>
-          <text x="130" y="188" text-anchor="middle" class="sub">rebuilt array</text>
-        </g>
-        <g class="dnode" data-node>
-          <rect x="0" y="260" width="260" height="60"/>
-          <text x="130" y="285" text-anchor="middle" font-size="12">BTRFS parity array</text>
-          <text x="130" y="301" text-anchor="middle" class="sub">~20TB raw, ~16TB usable</text>
-        </g>
-
-        <g class="dnode" data-node>
-          <rect x="400" y="30" width="140" height="50"/>
-          <text x="470" y="53" text-anchor="middle" font-size="12">500GB SSD</text>
-          <text x="470" y="68" text-anchor="middle" class="sub">cache</text>
-        </g>
-        <g class="dnode" data-node>
-          <rect x="560" y="30" width="140" height="50"/>
-          <text x="630" y="53" text-anchor="middle" font-size="12">1TB NVMe</text>
-          <text x="630" y="68" text-anchor="middle" class="sub">cache</text>
-        </g>
-        <g class="dnode" data-node>
-          <rect x="420" y="150" width="260" height="60"/>
-          <text x="550" y="175" text-anchor="middle" font-size="12">Mixed cache pool</text>
-          <text x="550" y="191" text-anchor="middle" class="sub">~750GB usable</text>
-        </g>
-
-        <g class="dnode" data-node>
-          <rect x="730" y="30" width="170" height="60"/>
-          <text x="815" y="55" text-anchor="middle" font-size="12">Quarantine SSD</text>
-          <text x="815" y="71" text-anchor="middle" class="sub">250GB, scan-gate staging</text>
-        </g>
-
-        <g class="dnode" data-node>
-          <rect x="260" y="370" width="400" height="55"/>
-          <text x="460" y="394" text-anchor="middle" font-size="12">Docker</text>
-          <text x="460" y="410" text-anchor="middle" class="sub">application &amp; VM workloads</text>
-        </g>
-
-        <g class="dnode" data-node>
-          <rect x="180" y="470" width="560" height="55"/>
-          <text x="460" y="494" text-anchor="middle" font-size="12">Share strategy</text>
-          <text x="460" y="510" text-anchor="middle" class="sub">production / application / staging</text>
-        </g>
-      </svg>
+    <div class="stage reveal">
+      <div class="stage-figure">photo — front panel removed, drive bays visible</div>
+      <div>
+        <h3>Front panel pops off</h3>
+        <p>Explanation of the drives — manufacturing detail and how they connect. <span class="placeholder-note">(fill in the specific drive/connector detail you want called out)</span></p>
+      </div>
     </div>
-    <div class="diagram-legend reveal">
-      <p><b>Recovery note —</b> after a cache-format incident, I rebuilt the whole Docker/VM application state with clearer separation between application data, production data, and caches — the layout above is the result.</p>
-      <p>Also running: a dedicated network switch for device access control and a UPS for outage protection.</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head reveal">
-      <h2>Network &amp; access</h2>
-      <span class="tag">domain / DNS / reverse proxy</span>
-    </div>
-    <div class="panel reveal">
-      <p style="color:var(--ink-dim); font-size:15px;">I own a personal domain fronted by a Cloudflare / Nginx Proxy Manager reverse-proxy layer, used to publish select self-hosted services under a controlled, authenticated namespace. Sensitive administrative infrastructure stays on strict LAN/Tailscale-only access — the forward-facing boundary is a deliberate architectural decision, not open internet exposure.</p>
-      <div class="tag-row">
-        <span class="tag">Cloudflare</span><span class="tag">Nginx Proxy Manager</span><span class="tag">Tailscale</span><span class="tag">Ubuntu administration</span>
+    <div class="stage reveal">
+      <div class="stage-figure">photo — internals exposed, components labeled</div>
+      <div>
+        <h3>Every part of the computer</h3>
+        <p>RAM, the RTX 4070 it runs on, the HBA card — shown and explained piece by piece.</p>
       </div>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="wrap">
-    <div class="section-head reveal">
-      <h2>Security labs</h2>
-      <span class="tag">practiced against isolated, self-owned VMs</span>
-    </div>
-    <div class="lab-grid reveal">
-      <div class="lab-card">
-        <h4>Active Directory domain lab</h4>
-        <span class="status">● built &amp; validated</span>
-        <p>A Windows Server AD environment in a VM — users, groups, OUs, and GPOs enforcing domain-wide password policy, with end-to-end domain-auth validated from a client.</p>
+  <div class="wrap-wide reveal">
+    <span class="eyebrow">SERVICES IT RUNS / PROJECTS</span>
+    <div style="margin-top:20px;">
+      <div class="item-row">
+        <div class="pic">pic of AD</div>
+        <div>
+          <h4>Automated data pipeline with security scanning gate</h4>
+          <p>Every incoming file routes through a scheduled malware scan before import — scan, approve, then import. Validated end-to-end on a 37-item batch.</p>
+        </div>
       </div>
-      <div class="lab-card">
-        <h4>Offensive security lab</h4>
-        <span class="status">● built &amp; validated</span>
-        <p>Kali Linux as a dedicated offensive workstation for reconnaissance, enumeration, and vulnerability-assessment against an isolated VM lab.</p>
+      <div class="item-row">
+        <div class="pic">pic of AD</div>
+        <div>
+          <h4>AI infrastructure assistant — n8n + Ollama</h4>
+          <p>A staged, safety-conscious architecture: read-only tooling, allowlisted commands, mandatory human confirmation before any state-changing action.</p>
+          <span class="status">in progress</span>
+        </div>
       </div>
-      <div class="lab-card">
-        <h4>Wazuh SIEM</h4>
-        <span class="status">● built &amp; validated</span>
-        <p>Centralized log collection and agent-based endpoint telemetry, mapping detections to MITRE ATT&amp;CK and tuning correlation rules to cut false positives.</p>
+      <div class="item-row">
+        <div class="pic">pic of AD</div>
+        <div>
+          <h4>Local AI infrastructure</h4>
+          <p>GPU-accelerated local AI stack — LLM serving, web interface, private search — on a 12GB RTX 4070.</p>
+        </div>
       </div>
-      <div class="lab-card">
-        <h4>Splunk SIEM</h4>
-        <span class="status">● built &amp; validated</span>
-        <p>A second SIEM platform alongside Wazuh, correlating log data and reinforcing detection-rule and IOC concepts across tooling.</p>
+      <div class="item-row">
+        <div class="pic">pic of AD</div>
+        <div>
+          <h4>Domain, DNS &amp; reverse-proxy architecture</h4>
+          <p>Cloudflare / Nginx Proxy Manager layer publishing select self-hosted services under a controlled namespace; sensitive admin stays LAN/Tailscale-only.</p>
+        </div>
       </div>
-      <div class="lab-card">
-        <h4>Metasploit exploitation practice</h4>
-        <span class="status">● built &amp; validated</span>
-        <p>Exploit modules and payloads run against controlled lab targets — the full path from vulnerability ID to exploit execution and validation.</p>
-      </div>
-      <div class="lab-card">
-        <h4>Web-app security (OWASP ZAP)</h4>
-        <span class="status">● built &amp; validated</span>
-        <p>OWASP Juice Shop as a deliberately vulnerable target, assessed with ZAP as an intercepting proxy against the OWASP Top 10.</p>
-      </div>
-      <div class="lab-card">
-        <h4>Network traffic analysis</h4>
-        <span class="status">● built &amp; validated</span>
-        <p>Live capture and analysis on a home network in Wireshark, using display filters for protocol-level inspection.</p>
-      </div>
-      <div class="lab-card">
-        <h4>Enterprise networking (Packet Tracer)</h4>
-        <span class="status">● built &amp; validated</span>
-        <p>Modeled enterprise topologies — IPv4 addressing, routing/switching, device config — with structured troubleshooting.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head reveal">
-      <h2>Automation &amp; AI infrastructure</h2>
-      <span class="tag">n8n / Ollama / scan-gated pipelines</span>
-    </div>
-    <div class="stack reveal">
-      <div class="lab-card">
-        <h4>Automated data pipeline with security scanning gate</h4>
-        <p>Every incoming file routes through a scheduled malware scan before import — a scan-then-approve-then-import workflow that replaced a manual process. Validated end-to-end on a 37-item batch (37/37 correct), after fixing a file-parsing issue and a scan-logic edge case that could misclassify an indeterminate result as a positive.</p>
-      </div>
-      <div class="lab-card">
-        <h4>AI infrastructure assistant <span class="status" style="color:var(--signal); display:inline;">— in progress</span></h4>
-        <p>A staged, safety-conscious architecture using n8n and Ollama: read-only tooling, allowlisted commands, and mandatory human confirmation before any state-changing action. Phase 1 is in progress.</p>
-      </div>
-      <div class="lab-card">
-        <h4>Local AI infrastructure</h4>
-        <p>A GPU-accelerated local AI stack — LLM serving, web interface, private search — on a 12GB RTX 4070, evaluating model sizes from 7B up to 50B+ parameters against VRAM/offload tradeoffs.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head reveal">
-      <h2>Outside the rack</h2>
-      <span class="tag">Unreal Engine 5 / Blender</span>
-    </div>
-    <div class="panel reveal">
-      <p style="color:var(--ink-dim); font-size:15px;">Part-time indie animator and game developer in Unreal Engine 5 — the creative counterpart to the infrastructure work above.</p>
-      <div class="tag-row">
-        <span class="tag">Unreal Engine 5</span><span class="tag">Blender</span><span class="tag">3D modeling</span><span class="tag">Animation</span><span class="tag">Generative AI</span>
-      </div>
-    </div>
-    <div class="btn-row reveal">
-      <a class="btn" href="career.html">Career &amp; certifications →</a>
-      <a class="btn" href="../index.html">← Back home</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">
-    <span>/homelab — last rebuilt after a cache-format recovery</span>
-    <a href="../index.html">index.html</a>
+  <div class="wrap-wide">
+    <span>© AbdursResearchLab</span>
+    <span>Contact info here</span>
   </div>
 </footer>
 
