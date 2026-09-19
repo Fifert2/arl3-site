@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-cd8023a6-d8db-4047-8219-91c7ab130969/styles.css">
+<script src="_ds/classical-cd8023a6-d8db-4047-8219-91c7ab130969/_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; }
+  a { color: var(--color-accent-700); text-decoration: none; }
+  a:hover { color: var(--color-accent-600); }
+  @keyframes carPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(.82); } }
+</style>
+</helmet>
+<main style="background: color-mix(in srgb, var(--color-bg) 78%, #d8c9ad); color: var(--color-text); font-family: var(--font-body); min-height: 100vh">
+
+  <div style="display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); padding-block: clamp(18px, 2.6vw, 32px); padding-inline: clamp(20px, 6vw, 84px)">
+    <a href="Portfolio Home.dc.html" style="display: inline-flex; align-items: center; gap: 0; position: relative; color: var(--color-accent-700); transition: opacity .25s ease" style-hover="opacity: .78">
+      <img src="resources/arl-logo-brown.png" alt="ARL" style="display: block; height: 44px; width: auto">
+
+    </a>
+    <nav style="display: flex; align-items: center; gap: 8px">
+      <a href="pages/homelab.html" style="font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); padding: 8px 15px; border-radius: 999px; border: 1px solid transparent; transition: border-color .25s ease, background .25s ease" style-hover="border-color: color-mix(in srgb, var(--color-accent) 45%, transparent); background: rgba(255,255,255,.4)">Homelab</a>
+      <a href="University.dc.html" style="font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); padding: 8px 15px; border-radius: 999px; border: 1px solid transparent; transition: border-color .25s ease, background .25s ease" style-hover="border-color: color-mix(in srgb, var(--color-accent) 45%, transparent); background: rgba(255,255,255,.4)">University</a>
+      <a href="Career.dc.html" style="font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); padding: 8px 15px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--color-accent) 55%, transparent); background: rgba(255,255,255,.5)">Career</a>
+    </nav>
+  </div>
+
+  <section style="padding: clamp(28px, 5vw, 64px) clamp(20px, 6vw, 84px) 0">
+    <div style="max-width: 1180px; margin: 0 auto; padding: clamp(28px, 4vw, 56px); border: 1px solid var(--color-divider); border-radius: 24px; background: rgba(255,255,255,.44)">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4)">
+        <span style="display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); font-variant-numeric: tabular-nums">
+          <span style="width: 7px; height: 7px; border-radius: 999px; background: var(--color-accent); animation: carPulse 2.2s ease-in-out infinite"></span> 03 · career
+        </span>
+        <span style="font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-neutral-600)">Open to 2027 internships</span>
+      </div>
+      <h1 style="margin: clamp(20px, 3vw, 36px) 0 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(42px, 7vw, 92px); line-height: 1.02; letter-spacing: -.02em; color: var(--color-accent-700); text-wrap: pretty">Career</h1>
+      <p style="margin: clamp(20px, 2.6vw, 32px) 0 0; max-width: 38rem; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.66; color: var(--color-neutral-800); text-wrap: pretty">{{ lede }}</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: clamp(12px, 1.6vw, 20px); margin-top: clamp(26px, 3.4vw, 44px)">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div style="padding: clamp(16px, 1.8vw, 22px); border: 1px solid var(--color-divider); border-radius: 16px; background: rgba(255,255,255,.4)">
+            <div style="font-family: var(--font-heading); font-size: clamp(28px, 3.4vw, 42px); line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; color: var(--color-accent-700)">{{ s.value }}</div>
+            <div style="margin-top: 7px; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-neutral-700)">{{ s.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: clamp(36px, 5vw, 64px) clamp(20px, 6vw, 84px) 0">
+    <div style="max-width: 1180px; margin: 0 auto">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; margin-bottom: clamp(20px, 2.6vw, 32px)">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -.015em">Experience</h2>
+        <span style="display: inline-flex; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-neutral-700)">most recent first</span>
+      </div>
+      <div style="display: grid; gap: clamp(14px, 1.6vw, 20px)">
+        <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="4">
+          <div style="display: grid; grid-template-columns: minmax(0, 4.2rem) minmax(0, 1fr); gap: clamp(14px, 2.4vw, 38px); padding: clamp(22px, 2.6vw, 34px); border: 1px solid var(--color-divider); border-radius: 20px; background: rgba(255,255,255,.36); transition: background .3s ease, border-color .3s ease" style-hover="background: rgba(255,255,255,.54); border-color: color-mix(in srgb, var(--color-accent) 42%, transparent)">
+            <span style="font-family: var(--font-heading); font-size: clamp(34px, 3.6vw, 48px); font-weight: 400; line-height: .9; font-variant-numeric: tabular-nums; color: color-mix(in srgb, var(--color-accent) 55%, transparent)">{{ t.num }}</span>
+            <div style="display: grid; gap: var(--space-3)">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap">
+                <span style="font-family: var(--font-heading); font-size: clamp(22px, 2.3vw, 29px); font-weight: 500; line-height: 1.15">{{ t.title }}</span>
+                <span style="font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent-700); font-variant-numeric: tabular-nums; white-space: nowrap">{{ t.when }}</span>
+              </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px">
+                <sc-for list="{{ t.where }}" as="w" hint-placeholder-count="2">
+                  <span style="padding: 5px 12px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 12px; color: var(--color-neutral-700)">{{ w }}</span>
+                </sc-for>
+              </div>
+              <div style="display: grid; gap: var(--space-3); max-width: 54rem; margin-top: var(--space-2)">
+                <sc-for list="{{ t.points }}" as="p" hint-placeholder-count="3">
+                  <p style="margin: 0; font-size: 16px; line-height: 1.7; text-align: justify; hyphens: auto; color: var(--color-neutral-900); text-wrap: pretty">{{ p }}</p>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: clamp(36px, 5vw, 64px) clamp(20px, 6vw, 84px) 0">
+    <div style="max-width: 1180px; margin: 0 auto">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; margin-bottom: clamp(20px, 2.6vw, 32px)">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -.015em">Certifications</h2>
+        <span style="display: inline-flex; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-neutral-700); font-variant-numeric: tabular-nums">01 earned · 02 in flight</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); gap: clamp(14px, 1.6vw, 20px)">
+        <sc-for list="{{ certs }}" as="c" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; gap: var(--space-3); padding: clamp(22px, 2.4vw, 32px); background: rgba(255,255,255,.4); border: 1px solid var(--color-divider); border-radius: 20px; transition: transform .3s cubic-bezier(.22,.61,.36,1), border-color .3s ease, background .3s ease" style-hover="transform: translateY(-5px); border-color: color-mix(in srgb, var(--color-accent) 45%, transparent); background: rgba(255,255,255,.56)">
+            <span style="align-self: start; padding: 5px 13px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700)">{{ c.status }}</span>
+            <span style="font-family: var(--font-heading); font-size: clamp(21px, 2.1vw, 26px); font-weight: 500; line-height: 1.15">{{ c.name }}</span>
+            <span style="font-size: 15.5px; line-height: 1.65; color: var(--color-neutral-800); text-wrap: pretty">{{ c.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: clamp(12px, 1.4vw, 16px); margin-top: clamp(14px, 1.6vw, 20px)">
+        <sc-for list="{{ roadmap }}" as="r" hint-placeholder-count="4">
+          <div style="display: grid; gap: 7px; padding: clamp(18px, 2vw, 24px); border: 1px solid var(--color-divider); border-radius: 16px; background: rgba(255,255,255,.28)">
+            <span style="align-self: start; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); font-variant-numeric: tabular-nums">{{ r.when }}</span>
+            <span style="font-family: var(--font-heading); font-size: clamp(18px, 1.8vw, 22px); font-weight: 500; line-height: 1.25">{{ r.title }}</span>
+            <span style="font-size: 15px; line-height: 1.6; color: var(--color-neutral-800); text-wrap: pretty">{{ r.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: clamp(36px, 5vw, 64px) clamp(20px, 6vw, 84px) 0">
+    <div style="max-width: 1180px; margin: 0 auto">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; margin-bottom: clamp(20px, 2.6vw, 32px)">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -.015em">Skills matrix</h2>
+        <span style="display: inline-flex; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-neutral-700); font-variant-numeric: tabular-nums">10 groups</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: clamp(14px, 1.6vw, 20px)">
+        <sc-for list="{{ skills }}" as="s" hint-placeholder-count="6">
+          <div style="padding: clamp(20px, 2.2vw, 28px); border: 1px solid var(--color-divider); border-radius: 18px; background: rgba(255,255,255,.34)">
+            <div style="font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700)">{{ s.group }}</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: var(--space-4)">
+              <sc-for list="{{ s.items }}" as="it" hint-placeholder-count="6">
+                <span style="padding: 5px 11px; border-radius: 999px; border: 1px solid var(--color-divider); background: rgba(255,255,255,.4); font-size: 12.5px; color: var(--color-neutral-800)">{{ it }}</span>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: clamp(40px, 5.5vw, 76px) clamp(20px, 6vw, 84px) clamp(48px, 6vw, 88px)">
+    <div style="max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: clamp(14px, 1.8vw, 24px); align-items: start">
+      <div style="padding: clamp(28px, 3.4vw, 48px); border: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent); border-radius: 24px; background: rgba(255,255,255,.44)">
+        <span style="display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700)">
+          <span style="width: 7px; height: 7px; border-radius: 999px; background: var(--color-accent); animation: carPulse 2.2s ease-in-out infinite"></span> Available
+        </span>
+        <h2 style="margin: clamp(18px, 2.4vw, 30px) 0 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.03; letter-spacing: -.02em; text-wrap: balance">Hire me<br><em style="font-style: italic; color: var(--color-accent-700)">for the hard parts.</em></h2>
+        <p style="margin: clamp(18px, 2.2vw, 28px) 0 var(--space-4); font-size: 17px; line-height: 1.7; color: var(--color-neutral-900); text-wrap: pretty">Looking for security, infrastructure and cloud work — internships, co-ops and project engagements. The fastest way to know whether I fit is the lab: everything on this site is running somewhere I maintain.</p>
+        <p style="margin: 0 0 var(--space-6); font-size: 17px; line-height: 1.7; color: var(--color-neutral-900)">Albany, NY — on site, hybrid or remote.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px">
+          <a href="mailto:islama9@rpi.edu" style="padding: 12px 22px; border-radius: 999px; border: 1px solid var(--color-accent); font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; transition: background .25s ease" style-hover="background: color-mix(in srgb, var(--color-accent) 14%, transparent)">Email me</a>
+          <a href="https://www.linkedin.com/in/abdurrahim-islam-01b940373" target="_blank" rel="noreferrer" style="padding: 12px 22px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; transition: border-color .25s ease" style-hover="border-color: var(--color-accent)">LinkedIn</a>
+          <a href="https://github.com/Fifert2" target="_blank" rel="noreferrer" style="padding: 12px 22px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; transition: border-color .25s ease" style-hover="border-color: var(--color-accent)">GitHub</a>
+        </div>
+      </div>
+
+      <div style="border: 1px solid var(--color-divider); border-radius: 24px; background: rgba(255,255,255,.44); padding: clamp(20px, 2.4vw, 28px)">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap">
+          <h3 style="margin: 0; font-family: var(--font-heading); font-weight: 500; font-size: clamp(20px, 2vw, 26px)">Résumé</h3>
+          <a href="resources/AbdurRahim-Islam-Resume.pdf" download="" style="font-size: 12px; letter-spacing: .16em; text-transform: uppercase; border: 1px solid var(--color-accent); border-radius: 999px; padding: 8px 16px; transition: background .25s ease" style-hover="background: color-mix(in srgb, var(--color-accent) 12%, transparent)">Download PDF</a>
+        </div>
+        <div style="margin-top: var(--space-4); border: 1px solid var(--color-divider); border-radius: 16px; overflow: hidden; background: var(--color-neutral-100)">
+          <iframe src="resources/AbdurRahim-Islam-Resume.pdf#view=FitH&amp;toolbar=0" title="AbdurRahim Islam — résumé" loading="lazy" style="display: block; width: 100%; height: clamp(420px, 56vh, 620px); border: 0"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding: clamp(28px, 4vw, 48px) clamp(20px, 6vw, 84px) clamp(40px, 5vw, 64px); border-top: 1px solid var(--color-divider); display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap">
+    <a href="University.dc.html" style="padding: 9px 17px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; transition: border-color .25s ease" style-hover="border-color: var(--color-accent)">← university &amp; coursework</a>
+    <a href="Portfolio Home.dc.html" style="padding: 9px 17px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; transition: border-color .25s ease" style-hover="border-color: var(--color-accent)">back to the lab →</a>
+  </footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lede&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Consulting on manufacturing data and cloud architecture, UX for an edge-AI platform, and a security track built out of self-hosted infrastructure — with the certifications taken in the order that keeps the work honest.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      lede: this.props.lede ?? 'Consulting on manufacturing data and cloud architecture, UX for an edge-AI platform, and a security track built out of self-hosted infrastructure — with the certifications taken in the order that keeps the work honest.',
+      stats: [
+        { value: '4', label: 'Roles held' },
+        { value: '260 TB', label: 'Scenario modeled' },
+        { value: '3', label: 'Certifications' },
+        { value: '12', label: 'Labs running' }
+      ],
+      timeline: [
+        {
+          num: '01',
+          when: 'Jun — Aug 2026',
+          title: 'Consultant — Data Analytics & Digital Media',
+          where: ['CSCMS · RPI manufacturing research center', 'Albany, NY · hybrid'],
+          points: [
+            'Augmented manufacturing data-collection workflows across four machines and thousands of operation-critical files, improving structure and traceability for downstream analytics and process-intelligence work.',
+            'Advised on cloud storage architecture, weighing AWS S3 against document-oriented storage for machine-generated data, and modeled a 260+ TB illustrative production scenario — video, thermal imaging, sensor logs — to frame object-storage and ML pipeline requirements.',
+            'Evaluated local-hosted infrastructure against SaaS on cost, control and scalability, and coordinated an internal network-switch effort to support the assessment.'
+          ]
+        },
+        {
+          num: '02',
+          when: 'Jun — Aug 2026',
+          title: 'Front-End & Product Design Engineer / UX Research Lead',
+          where: ['SMRCP — Smart Manufacturing Research Co-Pilot', 'Albany, NY · remote'],
+          points: [
+            'Designed and prototyped interfaces for an edge-based AI platform that lets operators talk to cyber-physical manufacturing systems in natural language.',
+            'Built dashboards for real-time and historical multi-modal sensor data, applying time-series analysis and sensor-fusion concepts.',
+            'Ran user interviews and focus groups, and turned the findings into product and interface changes.'
+          ]
+        },
+        {
+          num: '03',
+          when: 'Jun 2020 — now',
+          title: 'Associate / Social Media Manager',
+          where: ['Universal Concepts ITP · 501(c)(3)', 'Albany, NY'],
+          points: [
+            'Design and maintain the website and digital media presence for a nonprofit building workforce pathways for young people.'
+          ]
+        },
+        {
+          num: '04',
+          when: 'ongoing',
+          title: 'Homelab operator',
+          where: ['Self-hosted', 'Unraid · Docker · Tailscale'],
+          points: [
+            'Run storage, identity, monitoring and a deliberately breakable security lab — a parity-protected ~20 TB array, Docker workloads, a managed switch and a UPS.',
+            'Recovered full Docker and VM application state after a cache-format incident, rebuilding with clearer separation between application data, production data and caches.'
+          ]
+        }
+      ],
+      certs: [
+        { name: 'Google IT Support', body: 'System Administration track — Google / Coursera. The formal grounding under the help-desk-to-infrastructure path.', status: 'Earned' },
+        { name: 'CompTIA Security+ (SY0-701)', body: 'The baseline defensive vocabulary that maps directly onto the Wazuh and Splunk work.', status: 'In progress' },
+        { name: 'AWS Solutions Architect – Associate', body: 'SAA-C03 — the credential behind the S3, EC2 and IAM architecture work at CSCMS.', status: 'In progress' }
+      ],
+      roadmap: [
+        { when: 'Next', title: 'Finish Security+', body: 'Close out SY0-701 and convert the SIEM labs into documented detection write-ups.' },
+        { when: 'Then', title: 'AWS SAA-C03', body: 'Formalise the cloud-architecture work already done on object storage and data-lake design.' },
+        { when: '2027', title: 'Security internship', body: 'Take the Active Directory, SIEM and pen-testing labs into a real SOC or infrastructure team.' },
+        { when: 'Later', title: 'Red-team depth', body: 'Build on Kali, Metasploit and OWASP ZAP toward a structured offensive-security credential.' }
+      ],
+      skills: [
+        { group: 'Security & monitoring', items: ['Wazuh (SIEM)', 'Splunk', 'Log analysis', 'Alert triage', 'Endpoint monitoring', 'Quarantine workflows', 'Access control', 'Risk assessment'] },
+        { group: 'Offensive security', items: ['Kali Linux', 'Metasploit', 'OWASP ZAP', 'Pen-test methodology', 'Vulnerability assessment', 'Web app security testing'] },
+        { group: 'Systems & identity', items: ['Active Directory', 'Windows Server', 'Ubuntu Linux', 'Unraid', 'Docker', 'Virtual machines', 'SMB', 'NAS administration'] },
+        { group: 'Networking', items: ['Cisco Packet Tracer', 'Wireshark', 'TCP/IP', 'DNS', 'VLANs', 'Subnetting', 'Routing & switching', 'VPNs', 'Tailscale', 'Port mapping'] },
+        { group: 'Cloud & data architecture', items: ['AWS S3', 'EC2', 'IAM', 'Azure', 'Cloudflare', 'Nginx Proxy Manager', 'DNS management', 'Object storage', 'Data-lake design'] },
+        { group: 'Automation & integration', items: ['Python', 'Bash', 'REST APIs', 'n8n', 'Task orchestration'] },
+        { group: 'Data & programming', items: ['Python', 'Java', 'C', 'C++', 'R', 'SQL', 'MariaDB', 'PostgreSQL', 'MongoDB', 'Data visualization', 'Time-series analysis'] },
+        { group: 'AI infrastructure', items: ['Ollama', 'Local LLM deployment', 'GPU inference', 'Private search'] },
+        { group: 'Web & design', items: ['HTML', 'CSS', 'JavaScript', 'Figma', 'Balsamiq', 'UI/UX research', 'Responsive design'] },
+        { group: 'Working with people', items: ['Team collaboration', 'Presenting to non-technical stakeholders', 'Root-cause analysis', 'Self-directed learning'] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
