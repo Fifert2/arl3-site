@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-cd8023a6-d8db-4047-8219-91c7ab130969/styles.css">
+<script src="_ds/classical-cd8023a6-d8db-4047-8219-91c7ab130969/_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; }
+  a { color: var(--color-accent-700); text-decoration: none; }
+  a:hover { color: var(--color-accent-600); }
+  @keyframes uniPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(.82); } }
+</style>
+</helmet>
+<main style="background: color-mix(in srgb, var(--color-bg) 78%, #d8c9ad); color: var(--color-text); font-family: var(--font-body); min-height: 100vh">
+
+  <div style="display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); padding-block: clamp(18px, 2.6vw, 32px); padding-inline: clamp(20px, 6vw, 84px)">
+    <a href="Portfolio Home.dc.html" style="display: inline-flex; align-items: center; gap: 0; position: relative; color: var(--color-accent-700); transition: opacity .25s ease" style-hover="opacity: .78">
+      <img src="resources/arl-logo-brown.png" alt="ARL" style="display: block; height: 44px; width: auto">
+
+    </a>
+    <nav style="display: flex; align-items: center; gap: 8px">
+      <a href="pages/homelab.html" style="font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); padding: 8px 15px; border-radius: 999px; border: 1px solid transparent; transition: border-color .25s ease, background .25s ease" style-hover="border-color: color-mix(in srgb, var(--color-accent) 45%, transparent); background: rgba(255,255,255,.4)">Homelab</a>
+      <a href="University.dc.html" style="font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); padding: 8px 15px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--color-accent) 55%, transparent); background: rgba(255,255,255,.5)">University</a>
+      <a href="Career.dc.html" style="font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); padding: 8px 15px; border-radius: 999px; border: 1px solid transparent; transition: border-color .25s ease, background .25s ease" style-hover="border-color: color-mix(in srgb, var(--color-accent) 45%, transparent); background: rgba(255,255,255,.4)">Career</a>
+    </nav>
+  </div>
+
+  <section style="padding: clamp(28px, 5vw, 64px) clamp(20px, 6vw, 84px) 0">
+    <div style="max-width: 1180px; margin: 0 auto; padding: clamp(28px, 4vw, 56px); border: 1px solid var(--color-divider); border-radius: 24px; background: rgba(255,255,255,.44)">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4)">
+        <span style="display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); font-variant-numeric: tabular-nums">
+          <span style="width: 7px; height: 7px; border-radius: 999px; background: var(--color-accent); animation: uniPulse 2.2s ease-in-out infinite"></span> 02 · coursework
+        </span>
+        <span style="font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-neutral-600); font-variant-numeric: tabular-nums">Rensselaer · class of 2029</span>
+      </div>
+      <h1 style="margin: clamp(20px, 3vw, 36px) 0 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(42px, 7vw, 92px); line-height: 1.02; letter-spacing: -.02em; color: var(--color-accent-700); text-wrap: pretty">University</h1>
+      <p style="margin: clamp(20px, 2.6vw, 32px) 0 0; max-width: 38rem; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.66; color: var(--color-neutral-800); text-wrap: pretty">{{ lede }}</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: clamp(12px, 1.6vw, 20px); margin-top: clamp(26px, 3.4vw, 44px)">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div style="padding: clamp(16px, 1.8vw, 22px); border: 1px solid var(--color-divider); border-radius: 16px; background: rgba(255,255,255,.4)">
+            <div style="font-family: var(--font-heading); font-size: clamp(28px, 3.4vw, 42px); line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; color: var(--color-accent-700)">{{ s.value }}</div>
+            <div style="margin-top: 7px; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-neutral-700)">{{ s.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: clamp(36px, 5vw, 64px) clamp(20px, 6vw, 84px) 0">
+    <div style="max-width: 1180px; margin: 0 auto">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; margin-bottom: clamp(20px, 2.6vw, 32px)">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -.015em">Focus areas</h2>
+        <span style="display: inline-flex; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-neutral-700)">where the degree points</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: clamp(14px, 1.6vw, 20px)">
+        <sc-for list="{{ focus }}" as="f" hint-placeholder-count="3">
+          <div style="position: relative; overflow: hidden; display: flex; flex-direction: column; gap: var(--space-3); padding: clamp(22px, 2.4vw, 32px); background: rgba(255,255,255,.4); border: 1px solid var(--color-divider); border-radius: 20px; transition: transform .3s cubic-bezier(.22,.61,.36,1), border-color .3s ease, background .3s ease" style-hover="transform: translateY(-5px); border-color: color-mix(in srgb, var(--color-accent) 45%, transparent); background: rgba(255,255,255,.56)">
+            <span style="position: absolute; top: 8px; right: 18px; font-family: var(--font-heading); font-size: 62px; line-height: 1; font-variant-numeric: tabular-nums; color: color-mix(in srgb, var(--color-accent) 16%, transparent)">{{ f.num }}</span>
+            <span style="position: relative; font-family: var(--font-heading); font-size: clamp(21px, 2.1vw, 27px); font-weight: 500; line-height: 1.15; padding-right: 54px">{{ f.title }}</span>
+            <span style="position: relative; font-size: 15.5px; line-height: 1.65; color: var(--color-neutral-800); text-wrap: pretty">{{ f.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: clamp(36px, 5vw, 64px) clamp(20px, 6vw, 84px) 0">
+    <div style="max-width: 1180px; margin: 0 auto">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; margin-bottom: clamp(20px, 2.6vw, 32px)">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -.015em">Coursework</h2>
+        <span style="display: inline-flex; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-neutral-700); font-variant-numeric: tabular-nums">04 courses</span>
+      </div>
+      <div style="display: grid; gap: clamp(12px, 1.4vw, 16px)">
+        <sc-for list="{{ courses }}" as="c" hint-placeholder-count="4">
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: var(--space-3) clamp(16px, 3vw, 40px); align-items: center; padding: clamp(18px, 2.2vw, 28px); border: 1px solid var(--color-divider); border-radius: 18px; background: rgba(255,255,255,.34); transition: background .3s ease, border-color .3s ease" style-hover="background: rgba(255,255,255,.52); border-color: color-mix(in srgb, var(--color-accent) 42%, transparent)">
+            <div style="display: flex; flex-direction: column; gap: 9px">
+              <span style="font-family: var(--font-heading); font-size: clamp(19px, 1.9vw, 24px); font-weight: 500; line-height: 1.2">{{ c.name }}</span>
+              <span style="align-self: start; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent-700)">{{ c.area }}</span>
+            </div>
+            <span style="font-size: 15.5px; line-height: 1.65; color: var(--color-neutral-800); text-wrap: pretty">{{ c.note }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: clamp(36px, 5vw, 64px) clamp(20px, 6vw, 84px) 0">
+    <div style="max-width: 1180px; margin: 0 auto">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; margin-bottom: clamp(20px, 2.6vw, 32px)">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -.015em">Coursework projects</h2>
+        <a href="pages/homelab.html" style="display: inline-flex; padding: 9px 17px; border-radius: 999px; border: 1px solid var(--color-accent); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; transition: background .25s ease" style-hover="background: color-mix(in srgb, var(--color-accent) 12%, transparent)">See the rig →</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(14px, 1.6vw, 20px)">
+        <sc-for list="{{ projects }}" as="p" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: var(--space-3); padding: clamp(20px, 2.2vw, 28px); border: 1px solid var(--color-divider); border-radius: 20px; background: rgba(255,255,255,.4); transition: transform .3s cubic-bezier(.22,.61,.36,1), border-color .3s ease, background .3s ease" style-hover="transform: translateY(-5px); border-color: color-mix(in srgb, var(--color-accent) 45%, transparent); background: rgba(255,255,255,.56)">
+            <span style="font-family: var(--font-heading); font-size: clamp(21px, 2.1vw, 26px); font-weight: 500; line-height: 1.2">{{ p.title }}</span>
+            <span style="font-size: 15.5px; line-height: 1.65; color: var(--color-neutral-800); text-wrap: pretty">{{ p.body }}</span>
+            <span style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; padding-top: var(--space-4)">
+              <sc-for list="{{ p.stack }}" as="t" hint-placeholder-count="3">
+                <span style="padding: 5px 11px; border-radius: 999px; border: 1px solid var(--color-divider); background: rgba(255,255,255,.4); font-size: 12px; color: var(--color-neutral-700)">{{ t }}</span>
+              </sc-for>
+            </span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: clamp(36px, 5vw, 64px) clamp(20px, 6vw, 84px) 0">
+    <div style="max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: clamp(14px, 1.6vw, 20px); align-items: start">
+      <div style="padding: clamp(24px, 2.8vw, 36px); border: 1px solid var(--color-divider); border-radius: 22px; background: rgba(255,255,255,.4)">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.08; letter-spacing: -.015em">Outside the classroom</h2>
+        <div style="display: grid; gap: 10px; margin-top: clamp(20px, 2.4vw, 28px)">
+          <sc-for list="{{ activities }}" as="a" hint-placeholder-count="4">
+            <div style="display: grid; gap: 5px; padding: var(--space-4) clamp(16px, 1.8vw, 20px); border: 1px solid var(--color-divider); border-radius: 14px; background: rgba(255,255,255,.34)">
+              <span style="font-family: var(--font-heading); font-size: clamp(18px, 1.8vw, 22px); font-weight: 500; line-height: 1.2">{{ a.name }}</span>
+              <span style="font-size: 15px; line-height: 1.6; color: var(--color-neutral-800); text-wrap: pretty">{{ a.body }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="padding: clamp(24px, 2.8vw, 36px); border: 1px solid var(--color-divider); border-radius: 22px; background: rgba(255,255,255,.4)">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.08; letter-spacing: -.015em">The plan to 2029</h2>
+        <div style="display: grid; gap: 10px; margin-top: clamp(20px, 2.4vw, 28px)">
+          <sc-for list="{{ plan }}" as="p" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: minmax(0, 4.6rem) minmax(0, 1fr); gap: var(--space-4); padding: var(--space-4) clamp(16px, 1.8vw, 20px); border: 1px solid var(--color-divider); border-radius: 14px; background: rgba(255,255,255,.34)">
+              <span style="align-self: start; padding: 4px 0; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-700); font-variant-numeric: tabular-nums">{{ p.year }}</span>
+              <div style="display: grid; gap: 5px">
+                <span style="font-family: var(--font-heading); font-size: clamp(18px, 1.8vw, 22px); font-weight: 500; line-height: 1.25">{{ p.title }}</span>
+                <span style="font-size: 15px; line-height: 1.6; color: var(--color-neutral-800); text-wrap: pretty">{{ p.body }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: clamp(40px, 6vw, 80px) clamp(20px, 6vw, 84px) clamp(48px, 6vw, 84px)">
+    <div style="max-width: 1180px; margin: 0 auto; padding: clamp(30px, 4.4vw, 64px) clamp(24px, 4vw, 56px); border: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent); border-radius: 26px; background: rgba(255,255,255,.44); text-align: center">
+      <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(30px, 5vw, 58px); line-height: 1.04; letter-spacing: -.02em; text-wrap: balance">Three years left.<br><em style="font-style: italic; color: var(--color-accent-700)">The lab is already running.</em></h2>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: clamp(24px, 3vw, 38px)">
+        <a href="Career.dc.html" style="padding: 12px 24px; border-radius: 999px; border: 1px solid var(--color-accent); font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; transition: background .25s ease" style-hover="background: color-mix(in srgb, var(--color-accent) 14%, transparent)">Career &amp; certifications</a>
+        <a href="Portfolio Home.dc.html" style="padding: 12px 24px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; transition: border-color .25s ease" style-hover="border-color: var(--color-accent)">Back to the lab</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding: clamp(28px, 4vw, 48px) clamp(20px, 6vw, 84px) clamp(40px, 5vw, 64px); border-top: 1px solid var(--color-divider); display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap">
+    <a href="Portfolio Home.dc.html" style="padding: 9px 17px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; transition: border-color .25s ease" style-hover="border-color: var(--color-accent)">← back to the lab</a>
+    <a href="Career.dc.html" style="padding: 9px 17px; border-radius: 999px; border: 1px solid var(--color-divider); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; transition: border-color .25s ease" style-hover="border-color: var(--color-accent)">career &amp; certifications →</a>
+  </footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lede&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Computer Science and Information Technology &amp; Web Science at Rensselaer, class of 2029. The coursework, the projects I kept running after the grade was in, and where the next three years are pointed.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      lede: this.props.lede ?? 'Computer Science and Information Technology & Web Science at Rensselaer, class of 2029. The coursework, the projects I kept running after the grade was in, and where the next three years are pointed.',
+      stats: [
+        { value: '2029', label: 'Expected grad' },
+        { value: '2', label: 'Degrees in one' },
+        { value: '04', label: 'Courses logged' },
+        { value: '4', label: 'Orgs & sports' }
+      ],
+      focus: [
+        { num: '01', title: 'Systems & architecture', body: 'Computer Architecture and Operating Systems — the theory underneath the rack I already run at home.' },
+        { num: '02', title: 'Web systems', body: 'ITWS is the other half of the degree: web systems development, interface work, and how people actually use what gets built.' },
+        { num: '03', title: 'Security', body: 'Not yet a course sequence — a self-directed track in SIEM, Active Directory, and offensive tooling that the degree is catching up to.' }
+      ],
+      courses: [
+        { name: 'Foundations of Computer Science', area: 'Core', note: 'Proof, logic and the formal vocabulary the rest of the degree assumes.' },
+        { name: 'Computer Architecture & Operating Systems', area: 'Systems', note: 'Scheduling, memory and the hardware boundary — the closest course to how the homelab actually behaves.' },
+        { name: 'Data Structures', area: 'Core', note: 'Complexity as a design tool rather than an exam topic.' },
+        { name: 'Web Systems Development', area: 'ITWS', note: 'Full-stack web systems — the discipline this site is built on.' }
+      ],
+      projects: [
+        { title: 'This portfolio', body: 'Built and hosted by hand: a scroll-driven 3D exploded view of the rig, a résumé that stays in sync, and no framework doing the thinking for me.', stack: ['HTML', 'CSS', 'JavaScript', 'WebGL'] },
+        { title: 'Homelab NAS (Unraid)', body: 'The architecture and OS coursework made physical — a parity-protected XFS array on a flashed IT-mode HBA, a BTRFS cache pool, and Docker carrying every workload.', stack: ['Unraid', 'Docker', 'XFS', 'BTRFS'] },
+        { title: 'Active Directory domain lab', body: 'A Windows Server domain in a VM: users, groups and OUs, GPO-enforced password policy, and authentication validated end to end from a client.', stack: ['Windows Server', 'AD', 'GPO'] },
+        { title: 'Aflix — streaming service', body: 'A self-hosted Jellyfin service with automated transcoding and a scan-then-approve import pipeline, validated 37/37 on a batch import.', stack: ['Jellyfin', 'Python', 'Docker'] }
+      ],
+      activities: [
+        { name: 'National Society of Black Engineers', body: 'NSBE — the professional and academic community I keep closest at RPI.' },
+        { name: 'African Students Association', body: 'ASA — culture, community and the events that come with both.' },
+        { name: 'Boxing', body: 'Conditioning and discipline, on a clock that does not negotiate.' },
+        { name: 'Rugby', body: 'The team sport half of the same habit.' }
+      ],
+      plan: [
+        { year: '2026', title: 'Security+ and AWS', body: 'Finish CompTIA Security+ (SY0-701) and the AWS Solutions Architect – Associate, the two credentials the consulting and lab work already lean on.' },
+        { year: '2027', title: 'Security internship', body: 'Take the SIEM, Active Directory and pen-testing labs into a real SOC or infrastructure team for a summer.' },
+        { year: '2028', title: 'Depth', body: 'Upper-level systems, networks and security coursework, with the homelab as the permanent test environment.' },
+        { year: '2029', title: 'B.S., CS + ITWS', body: 'Graduate into security engineering or cloud infrastructure — the track everything on this site has been pointing at.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

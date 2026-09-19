@@ -1,147 +1,493 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Homelab — AbdurRahim Islam</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../main.css">
+<title>Homelab — Node N5</title>
+<link rel="stylesheet" href="../_ds/classical-cd8023a6-d8db-4047-8219-91c7ab130969/styles.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "../resources/vendor/three.module.js",
+    "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js",
+    "three/addons/exporters/OBJExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js",
+    "three/addons/exporters/GLTFExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js"
+  },
+  "integrity": {
+    "https://unpkg.com/three@0.184.0/build/three.module.js": "sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J",
+    "https://unpkg.com/three@0.184.0/build/three.core.js": "sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT",
+    "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js": "sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js": "sha384-nbwtoZENJD3Vq+ACK0CuGQdPMuDWHkamC2KJD70EV5nfg6jQjfppKOea07YJN+N3",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js": "sha384-VofkvpG6HERhFCYbsUOHeNXBCqID2nfqkQqnVzE1jc/oPcz+qJ13ADdXH08hE+cQ"
+  }
+}
+</script>
+<style>
+  :root { --ink: #f6f1e8; --ground: #14120f; --hair: rgba(246,241,232,.14); --card: rgba(246,241,232,.045); }
+  html, body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-body); }
+  body { overflow-x: hidden; }
+  a { color: var(--color-accent-300); text-decoration: none; }
+  a:hover { color: var(--color-accent-200); }
+  .kicker { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: rgba(246,241,232,.5); font-variant-numeric: tabular-nums; }
+  h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; margin: 0; letter-spacing: -.01em; }
+  .lede { max-width: 30rem; font-size: clamp(15px, 1.4vw, 18px); line-height: 1.66; color: rgba(246,241,232,.8); text-wrap: pretty; }
+  .rule { height: 1px; width: 84px; background: var(--color-accent-400); opacity: .9; }
+  .pill { display: inline-flex; align-self: flex-start; width: max-content; max-width: 100%; align-items: center; gap: 9px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--hair); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: rgba(246,241,232,.72); font-variant-numeric: tabular-nums; }
+  .pill-accent { border-color: color-mix(in srgb, var(--color-accent-400) 55%, transparent); color: var(--color-accent-300); }
+  .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-accent-400); animation: labPulse 2.2s ease-in-out infinite; }
+  @keyframes labPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(.82); } }
+  @keyframes labCue { 0%, 100% { transform: translateY(0); opacity: .7; } 50% { transform: translateY(7px); opacity: 1; } }
+  .glass { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px; border-radius: 999px; background: rgba(255,255,255,.10); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.18); box-shadow: 0 8px 26px rgba(0,0,0,.28); font-size: 12.5px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.82); }
+
+  #topbar { position: fixed; z-index: 8; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); padding-block: var(--space-4); padding-inline: clamp(20px, 6vw, 88px); }
+  #topbar nav { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  #topbar nav a { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: rgba(246,241,232,.82); padding: 8px 15px; border-radius: 999px; border: 1px solid transparent; transition: border-color .25s ease, background .25s ease, color .25s ease; }
+  #topbar nav a:hover { border-color: color-mix(in srgb, var(--color-accent-400) 55%, transparent); background: rgba(246,241,232,.06); color: var(--ink); }
+  #topbar nav a[aria-current="page"] { border-color: color-mix(in srgb, var(--color-accent-400) 65%, transparent); background: rgba(246,241,232,.08); color: var(--color-accent-300); }
+
+  /* — hero — */
+  #hero { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; }
+  #hero { background: #14120f url("../resources/rig-render.png") center / cover no-repeat; }
+  #hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  #hero .veil { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(20,18,15,.62) 0%, rgba(20,18,15,.26) 38%, rgba(20,18,15,.82) 100%); }
+  #hero .title { position: absolute; z-index: 2; top: 0; left: 0; right: 0; height: 66%; display: grid; place-items: center; padding: clamp(60px, 9vh, 110px) clamp(20px, 6vw, 88px) 0; }
+  #hero h1 { font-size: clamp(56px, 13vw, 190px); line-height: .92; letter-spacing: -.03em; text-align: center; background: linear-gradient(170deg, #fffaf1 0%, var(--color-accent-200) 34%, var(--color-accent-400) 62%, var(--color-accent-700) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  #hero .cue { position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(20px, 3vw, 34px); display: flex; justify-content: center; }
+
+  /* — exploded-view section — */
+  #explode { position: relative; }
+  #track { position: relative; height: 560vh; }
+  #stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  #scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .chapter { position: absolute; z-index: 4; top: 0; left: clamp(20px, 6vw, 88px); height: 100%; width: min(30rem, 34vw); display: flex; flex-direction: column; justify-content: center; gap: var(--space-4); opacity: 0; transition: opacity .45s ease, transform .45s ease; transform: translateY(16px); pointer-events: none; }
+  .chapter.on { opacity: 1; transform: none; }
+  #dots { position: fixed; z-index: 6; right: clamp(16px, 3vw, 40px); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 14px; opacity: 0; transition: opacity .35s ease; pointer-events: none; }
+  #dots.on { opacity: 1; pointer-events: auto; }
+  #dots button { appearance: none; background: none; border: 1px solid rgba(246,241,232,.35); width: 9px; height: 9px; border-radius: 50%; padding: 0; cursor: pointer; transition: background .25s ease, border-color .25s ease, transform .25s ease; }
+  #dots button[aria-current="true"] { background: var(--color-accent-300); border-color: var(--color-accent-300); transform: scale(1.35); }
+  #dots button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+  #callouts { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+  #leaders { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  #leaders line { stroke: var(--color-accent-400); stroke-width: 1; opacity: .55; }
+  #leaders circle { fill: var(--color-accent-300); }
+  .callout { position: absolute; width: 14rem; opacity: 0; transition: opacity .3s ease; padding-left: 12px; border-left: 1px solid rgba(246,241,232,.18); }
+  .callout h3 { margin: 0; font-family: var(--font-body); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-300); }
+  .callout p { margin: 3px 0 0; font-size: 12.5px; line-height: 1.45; color: rgba(246,241,232,.7); text-wrap: pretty; }
+  .specs { display: grid; grid-template-columns: auto 1fr; gap: 0 var(--space-4); font-size: 14.5px; }
+  .specs dt { padding: 10px 0; color: rgba(246,241,232,.5); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; border-top: 1px solid var(--hair); }
+  .specs dd { margin: 0; padding: 10px 0; border-top: 1px solid var(--hair); color: rgba(246,241,232,.9); font-variant-numeric: tabular-nums; }
+
+
+  /* — logo rails — */
+  .foundation { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(18px, 2.4vw, 34px); align-items: center; padding: clamp(20px, 2.4vw, 30px); border: 1px solid var(--hair); border-radius: 22px; background: var(--card); }
+  .foundation-art { width: clamp(150px, 16vw, 190px); height: clamp(92px, 9vw, 112px); display: flex; align-items: center; justify-content: center; border-radius: 18px; overflow: hidden; border: 1px solid var(--hair); background: rgba(246,241,232,.94); }
+  .foundation-art img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 620px) { .foundation { grid-template-columns: minmax(0, 1fr); } }
+  .foundation-copy { display: flex; flex-direction: column; gap: var(--space-3); }
+  .foundation-copy h3 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 500; line-height: 1.12; }
+  .foundation-copy p { margin: 0; font-size: 15.5px; line-height: 1.65; color: rgba(246,241,232,.72); text-wrap: pretty; }
+  .rail { display: grid; gap: clamp(12px, 1.4vw, 18px); margin-top: clamp(16px, 2vw, 24px); -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+  .marquee { overflow: hidden; }
+  .marquee-inner { display: flex; width: max-content; gap: clamp(12px, 1.4vw, 18px); }
+  .marquee-left { animation: railLeft 42s linear infinite; }
+  .marquee-right { animation: railLeft 46s linear infinite reverse; }
+  .rail:hover .marquee-inner { animation-play-state: paused; }
+  @keyframes railLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .tile { flex: 0 0 auto; width: clamp(170px, 17vw, 230px); height: clamp(96px, 10vw, 128px); display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--hair); border-radius: 18px; background: rgba(246,241,232,.94); transition: border-color .3s ease, transform .3s ease; }
+  .tile:hover { border-color: color-mix(in srgb, var(--color-accent-400) 55%, transparent); transform: translateY(-4px); }
+  .tile img { width: 100%; height: 100%; object-fit: cover; }
+  @media (prefers-reduced-motion: reduce) { .marquee-inner { animation: none; } }
+
+  /* — services — */
+  #services { position: relative; z-index: 2; background: var(--ground); padding: clamp(56px, 8vw, 120px) clamp(20px, 6vw, 88px) clamp(40px, 5vw, 64px); }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  .head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; margin-bottom: clamp(22px, 2.8vw, 36px); }
+  .head h2 { font-size: clamp(30px, 4.4vw, 56px); line-height: 1.02; letter-spacing: -.02em; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr)); gap: clamp(12px, 1.5vw, 18px); margin-bottom: clamp(26px, 3.4vw, 44px); }
+  .stat { padding: clamp(16px, 1.9vw, 24px); border: 1px solid var(--hair); border-radius: 16px; background: var(--card); }
+  .stat b { display: block; font-family: var(--font-heading); font-weight: 400; font-size: clamp(28px, 3.4vw, 44px); line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; color: var(--color-accent-300); }
+  .stat span { display: block; margin-top: 8px; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(246,241,232,.55); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: clamp(14px, 1.6vw, 20px); }
+  .svc { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: var(--space-3); padding: clamp(20px, 2.3vw, 30px); border: 1px solid var(--hair); border-radius: 20px; background: var(--card); transition: transform .3s cubic-bezier(.22,.61,.36,1), border-color .3s ease, background .3s ease; }
+  .svc:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--color-accent-400) 45%, transparent); background: rgba(246,241,232,.075); }
+  .svc .num { position: absolute; top: 8px; right: 18px; font-family: var(--font-heading); font-size: 56px; line-height: 1; font-variant-numeric: tabular-nums; color: rgba(246,241,232,.055); }
+  .svc h3 { position: relative; font-size: clamp(20px, 2vw, 25px); font-weight: 500; line-height: 1.18; padding-right: 48px; }
+  .svc p { position: relative; margin: 0; font-size: 15px; line-height: 1.62; color: rgba(246,241,232,.72); text-wrap: pretty; }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; padding-top: var(--space-3); }
+  .chip { padding: 5px 11px; border-radius: 999px; border: 1px solid var(--hair); font-size: 12px; color: rgba(246,241,232,.62); }
+  .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(14px, 1.6vw, 20px); margin-top: clamp(14px, 1.6vw, 20px); }
+  .panel { padding: clamp(22px, 2.5vw, 34px); border: 1px solid var(--hair); border-radius: 20px; background: var(--card); }
+  .panel h3 { font-size: clamp(21px, 2.1vw, 27px); font-weight: 500; line-height: 1.15; margin-bottom: var(--space-4); }
+  .row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); padding: 13px 0; border-top: 1px solid var(--hair); font-size: 15px; color: rgba(246,241,232,.82); }
+  .row span:last-child { font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(246,241,232,.48); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .cta { margin-top: clamp(26px, 3.4vw, 44px); padding: clamp(30px, 4.4vw, 64px) clamp(24px, 4vw, 56px); border: 1px solid color-mix(in srgb, var(--color-accent-400) 40%, transparent); border-radius: 26px; background: var(--card); text-align: center; }
+  .cta h2 { font-size: clamp(30px, 5vw, 58px); line-height: 1.04; letter-spacing: -.02em; text-wrap: balance; }
+  .cta em { font-style: italic; color: var(--color-accent-300); }
+  .btnrow { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: clamp(22px, 2.8vw, 36px); }
+  .btn-o { padding: 12px 24px; border-radius: 999px; border: 1px solid var(--hair); font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; color: rgba(246,241,232,.85); transition: border-color .25s ease, background .25s ease; }
+  .btn-o:hover { border-color: var(--color-accent-400); color: var(--ink); background: rgba(246,241,232,.05); }
+  .btn-a { border-color: color-mix(in srgb, var(--color-accent-400) 65%, transparent); color: var(--color-accent-300); }
+  .btn-a:hover { background: color-mix(in srgb, var(--color-accent-400) 14%, transparent); color: var(--color-accent-200); }
+
+  footer { position: relative; z-index: 2; padding: clamp(40px, 6vw, 80px) clamp(20px, 6vw, 88px); border-top: 1px solid var(--hair); display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+
+  @media (max-width: 720px) {
+    .chapter { width: auto; right: clamp(20px, 6vw, 88px); justify-content: flex-end; padding-bottom: 16vh; }
+    .callout { display: none; }
+  }
+</style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="wrap-wide">
-    <a class="arl-mark" href="../index.html">ARL</a>
-    <nav class="top-nav">
-      <span class="divider"></span>
-      <a href="homelab.html" class="current">Homelab</a><span class="sep">|</span>
-      <a href="university.html">University</a><span class="sep">|</span>
-      <a href="career.html">Career</a>
-    </nav>
-  </div>
-  <hr class="rule" style="margin-top:26px;">
-</header>
+<div id="topbar">
+  <a href="../Portfolio Home.dc.html" aria-label="ARL — home" style="display: inline-flex; align-items: center; transition: opacity .25s ease">
+    <img src="../resources/arl-logo.png" alt="ARL" style="display: block; height: 42px; width: auto">
+  </a>
+  <nav aria-label="Sections">
+    <a href="homelab.html" aria-current="page">Homelab</a>
+    <a href="../University.dc.html">University</a>
+    <a href="../Career.dc.html">Career</a>
+    <a href="../Portfolio Home.dc.html">Home</a>
+  </nav>
+</div>
 
-<section class="hero">
-  <div class="wrap-wide reveal">
-    <h1 style="font-size:clamp(30px,4.5vw,42px);">Homelab</h1>
-    <p class="placeholder-note" style="margin-top:10px;">Scroll through the build below — it locks in place and crossfades through your three photos as you scroll, then releases. Hotspots are live: click any marker on the internals photo.</p>
+<section id="hero">
+  <video id="herovid" autoplay muted loop playsinline preload="auto" poster="../resources/rig-render.png">
+    <source src="../resources/homelab-hero.mp4" type="video/mp4">
+    <source src="../resources/homelab-loop.webm" type="video/webm">
+  </video>
+  <div class="veil"></div>
+  <div class="title"></div>
+  <div class="cue"><span class="glass"><span style="animation: labCue 2.4s ease-in-out infinite">↓</span> scroll to disassemble</span></div>
+</section>
+
+<nav id="dots" aria-label="Chapters">
+  <button type="button" data-go="0" aria-current="true" aria-label="Assembled"></button>
+  <button type="button" data-go="1" aria-label="Inside the chassis"></button>
+  <button type="button" data-go="2" aria-label="Exploded view"></button>
+  <button type="button" data-go="3" aria-label="Key facts"></button>
+  <button type="button" data-go="4" aria-label="Back together"></button>
+</nav>
+
+<section id="explode" aria-label="Exploded view">
+  <div id="track">
+    <div id="stage">
+      <canvas id="scene"></canvas>
+      <div id="callouts">
+        <svg id="leaders" aria-hidden="true"></svg>
+        <div class="callout" data-anchor="chassis-top"><h3>Chassis</h3><p>Jonsbo N5 — eight-bay cube, hot-swap front cage.</p></div>
+        <div class="callout" data-anchor="aio-radiator"><h3>Cooling</h3><p>Arctic Freezer 280 AIO, dual 140 mm on the front intake.</p></div>
+        <div class="callout" data-anchor="sas-drive-1"><h3>Storage</h3><p>4 × 4 TB Toshiba SAS standing in the lower cage, loaded from the front.</p></div>
+        <div class="callout" data-anchor="gpu-4070"><h3>GPU</h3><p>RTX 4070 Founders Edition — transcode and local inference.</p></div>
+        <div class="callout" data-anchor="hba-card"><h3>HBA</h3><p>SAS host bus adapter feeding the four enterprise bays.</p></div>
+        <div class="callout" data-anchor="sata-ssd-1"><h3>Cache</h3><p>2 × Samsung SSD for VM and container volumes.</p></div>
+        <div class="callout" data-anchor="nvme-evo"><h3>Boot</h3><p>Samsung EVO NVMe — hypervisor and system datastore.</p></div>
+        <div class="callout" data-anchor="motherboard"><h3>Platform</h3><p>ASUS ROG STRIX B450-F Gaming with a Ryzen 9 5900X — 12 cores, 24 threads.</p></div>
+      </div>
+
+      <div class="chapter on" data-ch="0">
+        <span class="kicker">01 · assembled</span>
+        <h2 style="font-size: clamp(28px, 3.6vw, 48px); line-height: 1.08">Closed up,<br>under the desk</h2>
+        <div class="rule"></div>
+        <p class="lede">Wood door, eight bays behind it, one power cable and one network cable. Keep scrolling and it comes apart.</p>
+      </div>
+
+      <div class="chapter" data-ch="1">
+        <span class="kicker">02 · inside the chassis</span>
+        <h2 style="font-size: clamp(28px, 3.6vw, 48px); line-height: 1.08">Desktop silicon,<br>server duty</h2>
+        <div class="rule"></div>
+        <p class="lede">A Ryzen 9 5900X on an ASUS ROG STRIX B450-F Gaming board, held under an Arctic Freezer 280 AIO. Twelve cores is enough headroom to run storage, virtualisation and the security lab side by side without any of them noticing the others.</p>
+      </div>
+
+      <div class="chapter" data-ch="2">
+        <span class="kicker">03 · exploded view</span>
+        <h2 style="font-size: clamp(28px, 3.6vw, 48px); line-height: 1.08">Every part,<br>chosen twice</h2>
+        <div class="rule"></div>
+        <p class="lede">Enterprise SAS for bulk, SSDs for anything that gets written to, NVMe for the system itself — and an HBA so the drives talk to the board the way they were designed to.</p>
+      </div>
+
+      <div class="chapter" data-ch="3">
+        <span class="kicker">04 · key facts</span>
+        <h2 style="font-size: clamp(28px, 3.6vw, 48px); line-height: 1.08">Node N5</h2>
+        <div class="rule"></div>
+        <dl class="specs">
+          <dt>CPU</dt><dd>Ryzen 9 5900X — 12C / 24T</dd>
+          <dt>Board</dt><dd>ASUS ROG STRIX B450-F Gaming</dd>
+          <dt>Cooling</dt><dd>Arctic Freezer 280 AIO · front-mounted</dd>
+          <dt>GPU</dt><dd>RTX 4070 Founders Edition</dd>
+          <dt>Bulk</dt><dd>4 × 4 TB Toshiba SAS · 16 TB raw</dd>
+          <dt>Flash</dt><dd>2 × Samsung SSD · 1 × EVO NVMe</dd>
+          <dt>Fabric</dt><dd>SAS HBA · 8-bay hot-swap cage</dd>
+        </dl>
+      </div>
+
+      <div class="chapter" data-ch="4">
+        <span class="kicker">05 · back together</span>
+        <h2 style="font-size: clamp(28px, 3.6vw, 48px); line-height: 1.08">Closed up,<br>quiet again</h2>
+        <div class="rule"></div>
+        <p class="lede">Every panel back on, the wood door shut over eight bays. It sits under the desk and gets thought about roughly twice a year.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="homelab-sequence">
-  <div class="wrap-wide sequence-grid">
-    <div class="sequence-visual">
-      <img class="seq-img" data-step="0" src="../resources/homelab/case-closed.jpg" alt="Homelab case, closed, wood-slat front panel">
-      <img class="seq-img" data-step="1" src="../resources/homelab/case-drives.jpg" alt="Homelab case, drive bay open, 8-bay hot-swap">
-      <img class="seq-img" data-step="2" src="../resources/homelab/case-internals.jpg" alt="Homelab internals, GPU, cooler, and RAM exposed">
+<section id="services">
+  <div class="wrap">
+    <div class="head">
+      <h2>What runs on it</h2>
+      <span class="pill">06 · services</span>
     </div>
-    <div class="sequence-text">
-      <div class="seq-copy" data-step="0">
-        <span class="step-num">01 — CLOSED</span>
-        <h3>My homelab</h3>
-        <p>Self-built NAS and compute box, run as a real production environment rather than a demo. The wood-slat front hides an 8-bay hot-swap drive cage.</p>
-        <div class="sequence-progress"><span></span><span></span><span></span></div>
-      </div>
-      <div class="seq-copy" data-step="1">
-        <span class="step-num">02 — DRIVE BAY</span>
-        <h3>8-bay hot-swap storage</h3>
-        <p class="placeholder-note">Fill in the specific drive/connector detail you want called out here — capacities, hot-swap backplane, how they're numbered.</p>
-      </div>
-      <div class="seq-copy" data-step="2">
-        <span class="step-num">03 — INTERNALS</span>
-        <h3>Every part of the machine</h3>
-        <p>GPU, AIO liquid cooler, RGB RAM, and the cabling that ties it together — explored in detail below.</p>
+
+    <div class="stats">
+      <div class="stat"><b>20 TB</b><span>Parity-protected</span></div>
+      <div class="stat"><b>12</b><span>Labs &amp; services</span></div>
+      <div class="stat"><b>24</b><span>Threads on tap</span></div>
+      <div class="stat"><b>12 GB</b><span>VRAM for inference</span></div>
+    </div>
+
+    <div class="foundation">
+      <div class="foundation-art"><img src="../resources/logos/unraid.png" alt="Unraid"></div>
+      <div class="foundation-copy">
+        <span class="pill pill-accent">Foundation</span>
+        <h3>Unraid carries all of it</h3>
+        <p>Four 4 TB SAS drives on a flashed IT-mode HBA — a parity-protected XFS array, ~16 TB usable, with a BTRFS NVMe/SSD cache pool and a dedicated 250 GB quarantine SSD. Every service below is a Docker container or a VM on top of it.</p>
+        <div class="chips"><span class="chip">Unraid</span><span class="chip">Docker</span><span class="chip">XFS parity</span><span class="chip">BTRFS cache</span><span class="chip">SMB</span></div>
       </div>
     </div>
-  </div>
-</section>
 
-<section>
-  <div class="wrap-wide reveal">
-    <span class="eyebrow">EXPLORE THE BUILD</span>
-    <h2 style="font-size:26px; margin-top:10px;">Click any part to see what it does</h2>
-    <div class="hotspot-wrap" style="margin-top:24px;">
-      <img class="hotspot-img" src="../resources/homelab/case-internals.jpg" alt="Homelab internals, hotspots overlay">
-
-      <button class="hotspot" style="top:52%; left:36%;"
-        data-title="GeForce RTX GPU (EVGA)"
-        data-desc="Handles local AI inference and GPU-accelerated workloads — the RTX 4070 the local LLM stack runs on."></button>
-
-      <button class="hotspot" style="top:50%; left:63%;"
-        data-title="AIO liquid cooler"
-        data-desc="Closed-loop liquid cooling on the CPU, keeping thermals in check under sustained Docker/VM load."></button>
-
-      <button class="hotspot" style="top:68%; left:60%;"
-        data-title="RGB RAM"
-        data-desc="System memory feeding the VMs, containers, and local AI workloads running on this box."></button>
-
-      <button class="hotspot" style="top:33%; left:12%;"
-        data-title="Case fans"
-        data-desc="Front intake fans pulling cool air across the drive bay and GPU."></button>
-
-      <button class="hotspot" style="top:78%; left:75%;"
-        data-title="Cable management"
-        data-desc="PSU and data cabling — kept tidy for airflow and easier future upgrades."></button>
-
-      <div class="hotspot-panel" id="hotspot-panel" hidden>
-        <button class="hotspot-close" id="hotspot-close">×</button>
-        <h4 id="hotspot-panel-title"></h4>
-        <p id="hotspot-panel-desc"></p>
+    <div class="rail" aria-label="Services running on the server">
+      <div class="marquee">
+        <div class="marquee-inner marquee-left">
+        <div class="tile"><img src="../resources/logos/n8n.png" alt="n8n" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/active-directory.png" alt="Active Directory" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/owasp.png" alt="OWASP" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/jellyfin.png" alt="Jellyfin" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/nextcloud.png" alt="Nextcloud" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/kali.png" alt="Kali Linux" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/n8n.png" alt="n8n" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/active-directory.png" alt="Active Directory" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/owasp.png" alt="OWASP" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/jellyfin.png" alt="Jellyfin" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/nextcloud.png" alt="Nextcloud" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/kali.png" alt="Kali Linux" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="marquee">
+        <div class="marquee-inner marquee-right">
+        <div class="tile"><img src="../resources/logos/wireshark.png" alt="Wireshark" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/ollama.png" alt="Ollama" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/metasploit.png" alt="Metasploit" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/cisco-packet-tracer.png" alt="Cisco Packet Tracer" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/splunk.png" alt="Splunk" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/wazuh.png" alt="Wazuh" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/wireshark.png" alt="Wireshark" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/ollama.png" alt="Ollama" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/metasploit.png" alt="Metasploit" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/cisco-packet-tracer.png" alt="Cisco Packet Tracer" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/splunk.png" alt="Splunk" loading="lazy"></div>
+        <div class="tile"><img src="../resources/logos/wazuh.png" alt="Wazuh" loading="lazy"></div>
+        </div>
       </div>
     </div>
-    <p class="hotspot-hint">Marker positions are eyeballed — nudge the top/left percentages in pages/homelab.html once you see it live.</p>
-  </div>
-</section>
 
-<section>
-  <div class="wrap-wide reveal">
-    <span class="eyebrow">SERVICES IT RUNS / PROJECTS</span>
-    <div style="margin-top:20px;">
-      <div class="item-row">
-        <div class="pic">pic of AD</div>
-        <div>
-          <h4>Automated data pipeline with security scanning gate</h4>
-          <p>Every incoming file routes through a scheduled malware scan before import — scan, approve, then import. Validated end-to-end on a 37-item batch.</p>
-        </div>
+    <div class="split">
+      <div class="panel">
+        <h3>Also on the box</h3>
+        <div class="row"><span>Docker workload host</span><span>always on</span></div>
+        <div class="row"><span>VM hypervisor — AD, Kali, targets</span><span>always on</span></div>
+        <div class="row"><span>Nightly parity check &amp; SMART reporting</span><span>scheduled</span></div>
+        <div class="row"><span>Malware scan &amp; quarantine SSD workflow</span><span>on ingest</span></div>
+        <div class="row"><span>UPS-backed shutdown on power loss</span><span>standby</span></div>
       </div>
-      <div class="item-row">
-        <div class="pic">pic of AD</div>
-        <div>
-          <h4>AI infrastructure assistant — n8n + Ollama</h4>
-          <p>A staged, safety-conscious architecture: read-only tooling, allowlisted commands, mandatory human confirmation before any state-changing action.</p>
-          <span class="status">in progress</span>
-        </div>
+      <div class="panel">
+        <h3>How it's reached</h3>
+        <div class="row"><span>Managed switch · VLAN separation</span><span>LAN</span></div>
+        <div class="row"><span>Tailscale mesh for admin planes</span><span>private</span></div>
+        <div class="row"><span>Cloudflare + reverse proxy for published services</span><span>public</span></div>
+        <div class="row"><span>Unraid web UI &amp; SMB shares</span><span>LAN only</span></div>
+        <div class="row"><span>SIEM dashboards — Wazuh, Splunk</span><span>LAN only</span></div>
       </div>
-      <div class="item-row">
-        <div class="pic">pic of AD</div>
-        <div>
-          <h4>Local AI infrastructure</h4>
-          <p>GPU-accelerated local AI stack — LLM serving, web interface, private search — on a 12GB RTX 4070.</p>
-        </div>
-      </div>
-      <div class="item-row">
-        <div class="pic">pic of AD</div>
-        <div>
-          <h4>Domain, DNS &amp; reverse-proxy architecture</h4>
-          <p>Cloudflare / Nginx Proxy Manager layer publishing select self-hosted services under a controlled namespace; sensitive admin stays LAN/Tailscale-only.</p>
-        </div>
+    </div>
+
+    <div class="cta">
+      <span class="pill pill-accent"><span class="dot"></span>Available</span>
+      <h2 style="margin-top: var(--space-6)">Everything here<br><em>is running right now.</em></h2>
+      <div class="btnrow">
+        <a class="btn-o btn-a" href="mailto:islama9@rpi.edu">Email me</a>
+        <a class="btn-o" href="../Career.dc.html">Career &amp; certifications</a>
+        <a class="btn-o" href="../Portfolio Home.dc.html">Back to the lab</a>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap-wide">
-    <span>© AbdursResearchLab</span>
-    <span>Contact info here</span>
-  </div>
+  <span class="kicker">homelab · node n5</span>
+  <span class="kicker">specification current as of this build</span>
 </footer>
 
-<script src="../main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script src="homelab.js"></script>
+<script type="module">
+import { createScene } from './homelab-rig.js';
+
+const canvas = document.getElementById('scene');
+const track = document.getElementById('track');
+const chapters = [...document.querySelectorAll('.chapter')];
+const callouts = [...document.querySelectorAll('.callout')];
+const dotNav = document.getElementById('dots');
+const dots = [...document.querySelectorAll('#dots button')];
+const stage = createScene(canvas);
+const clamp = (v, a = 0, b = 1) => v < a ? a : v > b ? b : v;
+const ease = (p) => p * p * (3 - 2 * p);
+const band = (p, a, b) => clamp((p - a) / (b - a));
+
+const heroVid = document.getElementById('herovid');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+function applyMotion() {
+  if (!heroVid) return;
+  heroVid.muted = true;
+  if (reduce.matches) { heroVid.pause(); heroVid.removeAttribute('loop'); heroVid.currentTime = 0; }
+  else { heroVid.loop = true; const pl = heroVid.play(); if (pl && pl.catch) pl.catch(() => {}); }
+}
+applyMotion();
+reduce.addEventListener('change', applyMotion);
+
+let p = 0, inView = false, needsRender = true;
+
+function readScroll() {
+  const r = track.getBoundingClientRect();
+  const span = Math.max(track.offsetHeight - innerHeight, 1);
+  const np = clamp(-r.top / span);
+  if (np !== p) { p = np; needsRender = true; }
+  const nowIn = r.top < innerHeight * 0.4 && r.bottom > innerHeight * 0.6;
+  if (nowIn !== inView) { inView = nowIn; dotNav.classList.toggle('on', inView); }
+}
+
+function state() {
+  if (!stage.motionOk) return { explode: 0.62, spin: -0.5, tilt: 0.16, dist: 2.15, fade: 0.8, shift: -0.02 };
+  const open = ease(band(p, 0.16, 0.38));
+  const blow = ease(band(p, 0.38, 0.60));
+  const back = ease(band(p, 0.80, 0.99));
+  return {
+    explode: clamp(open * 0.34 + blow * 0.66 - back),
+    spin: -0.55 + ease(band(p, 0.04, 0.78)) * 2.6 - back * 2.6,
+    tilt: 0.1 + ease(band(p, 0.04, 0.5)) * 0.16 - back * 0.16,
+    dist: 1.18 + ease(band(p, 0.12, 0.60)) * 1.12 - back * 1.12,
+    fade: clamp(open * 0.55 + blow * 0.45 - back),
+    shift: -0.1 + ease(band(p, 0.24, 0.55)) * 0.085 - back * 0.085
+  };
+}
+
+function chapterIndex() {
+  if (p < 0.16) return 0;
+  if (p < 0.38) return 1;
+  if (p < 0.62) return 2;
+  if (p < 0.80) return 3;
+  return 4;
+}
+
+function syncSize() {
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if (!w || !h) return false;
+  const dpr = Math.min(devicePixelRatio, 2);
+  if (Math.abs(canvas.width - Math.round(w * dpr)) > 1 || Math.abs(canvas.height - Math.round(h * dpr)) > 1) {
+    try { stage.resize(); } catch (e) { console.warn('resize failed', e); }
+    return true;
+  }
+  return false;
+}
+
+function tick() {
+  try {
+    if (syncSize()) needsRender = true;
+    if (!needsRender) return;
+    needsRender = false;
+    const s = state();
+    try { stage.render(s); } catch (e) { console.warn('render failed', e); }
+
+    const ci = chapterIndex();
+    chapters.forEach((c, i) => c.classList.toggle('on', i === ci));
+    dots.forEach((d, i) => d.setAttribute('aria-current', String(i === ci)));
+
+    const show = stage.motionOk ? clamp((s.explode - 0.4) / 0.25) : 1;
+    try { layoutCallouts(show); } catch (e) { console.warn('callouts failed', e); }
+  } catch (e) {
+    console.warn('frame failed', e);
+  }
+}
+
+function frame() {
+  tick();
+  requestAnimationFrame(frame);
+}
+
+const leaders = document.getElementById('leaders');
+const NS = 'http://www.w3.org/2000/svg';
+const lines = callouts.map(() => {
+  const g = document.createElementNS(NS, 'g');
+  const line = document.createElementNS(NS, 'line');
+  const dot = document.createElementNS(NS, 'circle');
+  dot.setAttribute('r', '3.2');
+  g.append(line, dot);
+  leaders.append(g);
+  return { g, line, dot };
+});
+
+function layoutCallouts(show) {
+  const W = canvas.clientWidth, H = canvas.clientHeight;
+  const colX = Math.max(W - 15.5 * 16 - 28, W * 0.62);
+  const items = [];
+  callouts.forEach((el, i) => {
+    const pt = stage.project(el.dataset.anchor);
+    if (!pt || show < 0.02) {
+      el.style.opacity = '0';
+      lines[i].g.style.opacity = '0';
+      return;
+    }
+    items.push({ el, i, pt, y: pt.y, h: el.offsetHeight || 54 });
+  });
+  items.sort((a, b) => a.y - b.y);
+  const top = 76, bottom = H - 20;
+  const sum = items.reduce((t, it) => t + Math.max(it.h, 44), 0);
+  const gap = items.length > 1 ? Math.max(4, Math.min(20, (bottom - top - sum) / (items.length - 1))) : 0;
+  let cursor = top;
+  items.forEach((it) => {
+    it.ty = cursor;
+    cursor += Math.max(it.h, 44) + gap;
+  });
+  items.forEach((it) => {
+    it.el.style.opacity = String(show);
+    it.el.style.left = colX + 'px';
+    it.el.style.top = it.ty + 'px';
+    const l = lines[it.i];
+    l.g.style.opacity = String(show * 0.9);
+    l.line.setAttribute('x1', it.pt.x);
+    l.line.setAttribute('y1', it.pt.y);
+    l.line.setAttribute('x2', colX - 1);
+    l.line.setAttribute('y2', it.ty + 10);
+    l.dot.setAttribute('cx', it.pt.x);
+    l.dot.setAttribute('cy', it.pt.y);
+  });
+}
+
+addEventListener('scroll', () => { readScroll(); tick(); }, { passive: true });
+addEventListener('resize', () => { stage.resize(); readScroll(); tick(); });
+const trackTop = () => track.getBoundingClientRect().top + scrollY;
+dots.forEach((d) => d.addEventListener('click', () => {
+  const span = track.offsetHeight - innerHeight;
+  const targets = [0.03, 0.28, 0.50, 0.70, 0.97];
+  scrollTo({ top: trackTop() + span * targets[+d.dataset.go], behavior: stage.motionOk ? 'smooth' : 'auto' });
+}));
+
+window.addEventListener('rig-texture', () => { needsRender = true; });
+addEventListener('load', () => { stage.resize(); readScroll(); tick(); });
+if ('ResizeObserver' in window) new ResizeObserver(() => { needsRender = true; tick(); }).observe(canvas);
+
+readScroll();
+needsRender = true;
+tick();
+frame();
+// Safety net for environments that throttle rAF or swallow scroll events.
+setInterval(() => { readScroll(); tick(); }, 250);
+</script>
 </body>
 </html>
