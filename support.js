@@ -1149,7 +1149,8 @@
   function cdnScriptFor(url, sri) {
     const res = window.__resources;
     const v = res ? res[url] : void 0;
-    return typeof v === "string" && v ? { src: v } : { src: url, integrity: sri };
+    const src = typeof v === "string" && v ? v : url;
+    return /^https?:\/\//i.test(src) ? { src, integrity: sri } : { src };
   }
 
   // src/external.ts
