@@ -187,7 +187,7 @@ section.tight{ padding: 40px 0; }
 .reveal{ opacity: 0; transform: translateY(12px); transition: opacity 550ms ease, transform 550ms ease; }
 .reveal.in{ opacity: 1; transform: none; }
 
-/* ---------- stacked homelab stages ---------- */
+/* ---------- stacked homelab stages (legacy — superseded by pinned sequence below) ---------- */
 .stage{ display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding: 56px 0; }
 .stage:nth-child(even){ direction: rtl; }
 .stage:nth-child(even) > *{ direction: ltr; }
@@ -204,6 +204,95 @@ section.tight{ padding: 40px 0; }
   .stage{ grid-template-columns: 1fr; direction: ltr !important; }
   .stage > *{ direction: ltr !important; }
 }
+
+/* ---------- pinned scroll sequence ---------- */
+#homelab-sequence{ position: relative; min-height: 300vh; }
+.sequence-grid{
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 56px;
+  opacity: 0;
+  transform: scale(0.94);
+}
+.sequence-grid.in{ opacity: 1; transform: none; transition: opacity 700ms ease, transform 700ms ease; }
+.sequence-visual{
+  position: relative;
+  aspect-ratio: 3/4;
+  max-height: 78vh;
+  border: 1px solid var(--line);
+  background: var(--ink);
+  overflow: hidden;
+}
+.seq-img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+}
+.seq-img[data-step="0"]{ opacity: 1; }
+.sequence-text{ position: relative; height: 100%; }
+.seq-copy{
+  position: absolute; left: 0; right: 0; top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+}
+.seq-copy[data-step="0"]{ opacity: 1; }
+.seq-copy .step-num{ font-family: var(--sans); font-size: 13px; color: var(--accent); font-weight: 600; }
+.seq-copy h3{ font-size: 26px; margin-top: 10px; }
+.seq-copy p{ color: var(--ink-2); font-size: 15px; margin-top: 12px; max-width: 380px; }
+.sequence-progress{ display: flex; gap: 8px; margin-top: 26px; }
+.sequence-progress span{ width: 26px; height: 3px; background: var(--line); }
+.sequence-progress span.active{ background: var(--accent); }
+@media (max-width: 780px){
+  #homelab-sequence{ min-height: auto; }
+  .sequence-grid{ height: auto; grid-template-columns: 1fr; padding: 40px 0; opacity: 1; transform: none; }
+  .sequence-visual{ max-height: 60vh; }
+  .seq-img{ position: static; opacity: 1 !important; }
+  .seq-img:not([data-step="0"]){ display: none; }
+  .sequence-text{ height: auto; margin-top: 24px; }
+  .seq-copy{ position: static; transform: none; opacity: 1 !important; margin-bottom: 24px; }
+  .seq-copy:not([data-step="0"]){ display: none; }
+}
+
+/* ---------- interactive hotspots ---------- */
+.hotspot-wrap{ position: relative; border: 1px solid var(--line); overflow: hidden; }
+.hotspot-img{ width: 100%; display: block; }
+.hotspot{
+  position: absolute;
+  width: 22px; height: 22px;
+  margin: -11px 0 0 -11px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid #fff;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: 0 0 0 0 rgba(140,35,49,0.55);
+  animation: hotspot-pulse 2.4s ease-out infinite;
+}
+.hotspot:hover, .hotspot.active{ background: var(--ink); }
+@keyframes hotspot-pulse{
+  0%{ box-shadow: 0 0 0 0 rgba(140,35,49,0.45); }
+  70%{ box-shadow: 0 0 0 14px rgba(140,35,49,0); }
+  100%{ box-shadow: 0 0 0 0 rgba(140,35,49,0); }
+}
+.hotspot-panel{
+  position: absolute;
+  bottom: 20px; left: 20px; right: 20px;
+  max-width: 360px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 18px 20px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+}
+.hotspot-panel h4{ font-family: var(--sans); font-weight: 600; font-size: 16px; padding-right: 20px; }
+.hotspot-panel p{ color: var(--ink-2); font-size: 14px; margin-top: 8px; }
+.hotspot-close{
+  position: absolute; top: 12px; right: 14px;
+  background: none; border: none; font-size: 18px; color: var(--ink-3); cursor: pointer; line-height: 1;
+}
+.hotspot-hint{ font-size: 12.5px; color: var(--ink-3); margin-top: 12px; }
 
 /* ---------- footer ---------- */
 footer{ padding: 40px 0 60px; border-top: 1px solid var(--line); margin-top: 40px; }

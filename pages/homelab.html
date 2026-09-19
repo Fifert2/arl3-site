@@ -26,33 +26,72 @@
 <section class="hero">
   <div class="wrap-wide reveal">
     <h1 style="font-size:clamp(30px,4.5vw,42px);">Homelab</h1>
-    <p class="placeholder-note" style="margin-top:10px;">Animations here should be stacked — each stage animates in as you scroll. This pass is the layout only; real scroll-triggered motion (case popping open, etc.) comes next in the IDE.</p>
+    <p class="placeholder-note" style="margin-top:10px;">Scroll through the build below — it locks in place and crossfades through your three photos as you scroll, then releases. Hotspots are live: click any marker on the internals photo.</p>
   </div>
 </section>
 
-<section class="tight">
-  <div class="wrap-wide">
-    <div class="stage reveal">
-      <div class="stage-figure">photo — Jonsbo N3 case, closed</div>
-      <div>
-        <h3>My homelab — Jonsbo case</h3>
-        <p>Self-built NAS in a Jonsbo case, run as a real production environment rather than a demo.</p>
+<section id="homelab-sequence">
+  <div class="wrap-wide sequence-grid">
+    <div class="sequence-visual">
+      <img class="seq-img" data-step="0" src="../resources/homelab/case-closed.jpg" alt="Homelab case, closed, wood-slat front panel">
+      <img class="seq-img" data-step="1" src="../resources/homelab/case-drives.jpg" alt="Homelab case, drive bay open, 8-bay hot-swap">
+      <img class="seq-img" data-step="2" src="../resources/homelab/case-internals.jpg" alt="Homelab internals, GPU, cooler, and RAM exposed">
+    </div>
+    <div class="sequence-text">
+      <div class="seq-copy" data-step="0">
+        <span class="step-num">01 — CLOSED</span>
+        <h3>My homelab</h3>
+        <p>Self-built NAS and compute box, run as a real production environment rather than a demo. The wood-slat front hides an 8-bay hot-swap drive cage.</p>
+        <div class="sequence-progress"><span></span><span></span><span></span></div>
+      </div>
+      <div class="seq-copy" data-step="1">
+        <span class="step-num">02 — DRIVE BAY</span>
+        <h3>8-bay hot-swap storage</h3>
+        <p class="placeholder-note">Fill in the specific drive/connector detail you want called out here — capacities, hot-swap backplane, how they're numbered.</p>
+      </div>
+      <div class="seq-copy" data-step="2">
+        <span class="step-num">03 — INTERNALS</span>
+        <h3>Every part of the machine</h3>
+        <p>GPU, AIO liquid cooler, RGB RAM, and the cabling that ties it together — explored in detail below.</p>
       </div>
     </div>
-    <div class="stage reveal">
-      <div class="stage-figure">photo — front panel removed, drive bays visible</div>
-      <div>
-        <h3>Front panel pops off</h3>
-        <p>Explanation of the drives — manufacturing detail and how they connect. <span class="placeholder-note">(fill in the specific drive/connector detail you want called out)</span></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap-wide reveal">
+    <span class="eyebrow">EXPLORE THE BUILD</span>
+    <h2 style="font-size:26px; margin-top:10px;">Click any part to see what it does</h2>
+    <div class="hotspot-wrap" style="margin-top:24px;">
+      <img class="hotspot-img" src="../resources/homelab/case-internals.jpg" alt="Homelab internals, hotspots overlay">
+
+      <button class="hotspot" style="top:52%; left:36%;"
+        data-title="GeForce RTX GPU (EVGA)"
+        data-desc="Handles local AI inference and GPU-accelerated workloads — the RTX 4070 the local LLM stack runs on."></button>
+
+      <button class="hotspot" style="top:50%; left:63%;"
+        data-title="AIO liquid cooler"
+        data-desc="Closed-loop liquid cooling on the CPU, keeping thermals in check under sustained Docker/VM load."></button>
+
+      <button class="hotspot" style="top:68%; left:60%;"
+        data-title="RGB RAM"
+        data-desc="System memory feeding the VMs, containers, and local AI workloads running on this box."></button>
+
+      <button class="hotspot" style="top:33%; left:12%;"
+        data-title="Case fans"
+        data-desc="Front intake fans pulling cool air across the drive bay and GPU."></button>
+
+      <button class="hotspot" style="top:78%; left:75%;"
+        data-title="Cable management"
+        data-desc="PSU and data cabling — kept tidy for airflow and easier future upgrades."></button>
+
+      <div class="hotspot-panel" id="hotspot-panel" hidden>
+        <button class="hotspot-close" id="hotspot-close">×</button>
+        <h4 id="hotspot-panel-title"></h4>
+        <p id="hotspot-panel-desc"></p>
       </div>
     </div>
-    <div class="stage reveal">
-      <div class="stage-figure">photo — internals exposed, components labeled</div>
-      <div>
-        <h3>Every part of the computer</h3>
-        <p>RAM, the RTX 4070 it runs on, the HBA card — shown and explained piece by piece.</p>
-      </div>
-    </div>
+    <p class="hotspot-hint">Marker positions are eyeballed — nudge the top/left percentages in pages/homelab.html once you see it live.</p>
   </div>
 </section>
 
@@ -101,5 +140,8 @@
 </footer>
 
 <script src="../main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="homelab.js"></script>
 </body>
 </html>
