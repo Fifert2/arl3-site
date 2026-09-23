@@ -1,44 +1,105 @@
-# ARL3 — Personal Technical Portfolio
+<div align="center">
 
-A custom-built portfolio documenting my homelab infrastructure,
-cybersecurity labs, university work, and product-engineering experience.
+<img src="resources/arl-logo.png" alt="ARL logo" width="125">
 
-[View Live Site](https://arl3.com) · [Explore the Homelab](https://arl3.com/pages/homelab.html)
+# ARL3 — Technical Portfolio
 
-![ARL3 portfolio preview](docs/assets/portfolio-preview.png)
+A custom-built portfolio documenting homelab infrastructure,
+cybersecurity projects, university work, and product engineering.
 
-Personal portfolio site — plain HTML/CSS/JS, no build step. Four pages:
+[View Live Website](https://arl3.com) ·
+[Explore the Homelab](https://arl3.com/pages/homelab.html) ·
+[View Résumé](https://arl3.com/resources/AbdurRahim-Islam-Resume.pdf)
 
-- `index.html` — home
-- `homelab.html` — homelab &amp; projects (animated architecture diagram + lab list)
-- `university.html` — education
-- `career.html` — experience &amp; certifications
+</div>
 
-Résumé lives at `assets/resume.pdf` — swap the file (same name) to update it everywhere it's embedded/linked.
+---
 
-## Deploy on GitHub Pages (auto-updates on every push)
+[![ARL3 portfolio and homelab preview](resources/homelab-loop-poster.png)](https://arl3.com)
 
-1. Create a new GitHub repo and push this folder as its contents:
-   ```bash
-   git init
-   git add .
-   git commit -m "initial site"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/<repo-name>.git
-   git push -u origin main
-   ```
-2. On GitHub: **Settings → Pages → Build and deployment → Source → GitHub Actions**.
-   (The included workflow at `.github/workflows/deploy.yml` handles the rest.)
-3. Every future `git push` to `main` automatically rebuilds and redeploys the live site — no manual step.
+<p align="center">
+  <em>Click the image to experience the animated portfolio.</em>
+</p>
 
-Your site will be live at `https://<your-username>.github.io/<repo-name>/`.
-If you want a custom domain, add a `CNAME` file with the domain name at the repo root and point your DNS at GitHub Pages (see GitHub's "Managing a custom domain" docs).
+## Overview
 
-## Updating content later
+ARL3 is my personal technical portfolio and an evolving record of my
+work in infrastructure, cybersecurity, systems administration,
+automation, AI, and product design.
 
-- **Add a lab / project**: copy a `.lab-card` block in `homelab.html`.
-- **Add a job or degree**: copy an `.entry` block in `career.html` / `university.html`.
-- **Change colors/fonts**: edit the `:root` variables at the top of `assets/css/style.css`.
-- **Resume**: replace `assets/resume.pdf`.
+Unlike a template-based portfolio, the site was built with custom
+HTML, CSS, and JavaScript. It includes an interactive homelab
+presentation, animated media, technical project summaries, professional
+experience, and university work.
 
-No server, database, or build tooling — just static files, so any push updates the live site within a minute or two.
+## Project at a Glance
+
+| Area | Details |
+|---|---|
+| Purpose | Technical portfolio and project documentation |
+| Focus | Infrastructure, cybersecurity, automation, and product engineering |
+| Technologies | HTML, CSS, JavaScript, Three.js, GitHub Pages |
+| Deployment | GitHub Pages with a custom domain |
+| Status | Actively maintained |
+| Live site | [arl3.com](https://arl3.com) |
+
+## Featured Areas
+
+### Homelab Infrastructure
+
+An interactive presentation of my private infrastructure environment,
+including:
+
+- Unraid storage and virtualization
+- Dockerized applications
+- Tailscale private networking
+- Active Directory experimentation
+- Wazuh and SIEM practice
+- Media automation and security scanning
+- Local AI services and workflow automation
+
+[Explore the Homelab →](https://arl3.com/pages/homelab.html)
+
+### Professional Experience
+
+Project and experience summaries covering front-end engineering,
+technical support, manufacturing technology, automation, and UX work.
+
+[View Career Experience →](https://arl3.com/Career.dc.html)
+
+### University Work
+
+Relevant coursework, technical development, and academic experience at
+Rensselaer Polytechnic Institute.
+
+[View University Work →](https://arl3.com/University.dc.html)
+
+## Technical Highlights
+
+- Custom responsive interface without a site-building platform
+- Animated WebM hero with a static fallback poster
+- Interactive 3D homelab visualization
+- Locally hosted fonts and visual assets
+- Reusable design-system styles and components
+- Custom domain deployment through GitHub Pages
+- Responsive layouts for desktop and mobile devices
+
+## Repository Structure
+
+```text
+arl3-site/
+├── index.html                 # Main portfolio landing page
+├── pages/
+│   ├── homelab.html          # Homelab project presentation
+│   └── homelab-rig.js        # Interactive rig visualization
+├── resources/
+│   ├── homelab-loop.webm     # Animated hero media
+│   ├── homelab-loop-poster.png
+│   ├── design-system.css
+│   ├── design-system.js
+│   ├── logos/
+│   └── fonts/
+├── main.css
+├── main.js
+├── support.js
+└── CNAME
