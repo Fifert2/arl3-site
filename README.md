@@ -1,4 +1,11 @@
-# abdurrahim-islam.site
+# ARL3 — Personal Technical Portfolio
+
+A custom-built portfolio documenting my homelab infrastructure,
+cybersecurity labs, university work, and product-engineering experience.
+
+[View Live Site](https://arl3.com) · [Explore the Homelab](https://arl3.com/pages/homelab.html)
+
+![ARL3 portfolio preview](docs/assets/portfolio-preview.png)
 
 Personal portfolio site — plain HTML/CSS/JS, no build step. Four pages:
 
